@@ -1,0 +1,6 @@
+{
+  "name": "Pashalan Spatial Studio (pashalan.ir)",
+  "description": "پلتفرم تخصصی طراحی وب‌سایت‌های سه‌بعدی، موشن‌گرافیک، پکیج‌های آماده اقتصادی و توسعه اپلیکیشن‌های موبایل اندروید و iOS",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

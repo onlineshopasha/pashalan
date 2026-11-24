@@ -1,0 +1,58 @@
+# Pashalan.ir — Search Engine & AI Search Crawler Policy (SEO + GEO/AEO)
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Major Search Engines
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+# AI Search & Generative Engine Crawlers (GEO / AEO)
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+Sitemap: https://pashalan.ir/sitemap.xml
+# AI Knowledge Endpoints:
+# https://pashalan.ir/llms.txt
+# https://pashalan.ir/llms-full.txt

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Core Pages (8 Clean Canonical URLs) -->
+  <url>
+    <loc>https://pashalan.ir/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/templates</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/tools</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/services</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/blog</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/about</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/contact</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/auth</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- 4 Dedicated Interactive Section URLs -->
+  <url>
+    <loc>https://pashalan.ir/domain-checker</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/ai-studio</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/calculator</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/tracker</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- AI Knowledge & Generative Engine Endpoints (GEO/AEO) -->
+  <url>
+    <loc>https://pashalan.ir/llms.txt</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://pashalan.ir/llms-full.txt</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 7 Clean Programmatic Industry Landing Routes (Exact Real Category IDs) -->
+  <url><loc>https://pashalan.ir/industry/ecommerce-shop</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/industry/clinic-wellness</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/industry/corporate-industrial</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/industry/fashion-retail</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/industry/real-estate</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/industry/cafe-restaurant</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/industry/education-lms</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+
+  <!-- 14 Clean Dedicated Plugin Pages (Free / Pro / VIP) -->
+  <url><loc>https://pashalan.ir/plugin/bale-shaparak-payment-gateway</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/plugin/sms-otp-fast-login</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/plugin/seo-schema-sitemap-pro</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/plugin/iran-post-tipax-shipping</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/plugin/torob-emalls-basalam-sync</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/plugin/snapppay-tara-digipay-installments</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://pashalan.ir/plugin/abandoned-cart-recovery-engine</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://pashalan.ir/plugin/core-web-vitals-speed-turbo</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/plugin/security-waf-cloud-backup</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/plugin/bale-livechat-crm-widget</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/plugin/vip-loyalty-wallet-cashback</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://pashalan.ir/plugin/vip-ai-seo-copywriter</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/plugin/vip-drm-video-course-protection</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://pashalan.ir/plugin/vip-accounting-holoo-sepidar-erp</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+
+  <!-- 26 Clean Expert SEO & Growth Articles -->
+  <url><loc>https://pashalan.ir/blog/website-design-cost-iran-1405</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+  <url><loc>https://pashalan.ir/blog/com-vs-ir-domain-choice-iran</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+  <url><loc>https://pashalan.ir/blog/custom-fast-site-vs-slow-wordpress</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+  <url><loc>https://pashalan.ir/blog/double-sales-snapppay-torob-iran</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+  <url><loc>https://pashalan.ir/blog/google-core-web-vitals-2026-seo</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+  <url><loc>https://pashalan.ir/blog/how-to-get-enamad-and-shaparak-fast</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+  <url><loc>https://pashalan.ir/blog/pwa-vs-flutter-mobile-app-iran</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/safe-web-design-contract-checklist</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/convert-instagram-followers-to-website-buyers</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/online-booking-for-medical-clinics</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/real-estate-website-lead-generation</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/multilingual-corporate-export-website</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/restaurant-direct-ordering-qr-menu</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/content-marketing-and-seo-roi</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/when-to-redesign-your-website</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/website-security-waf-and-backup-guide</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/sell-online-courses-with-drm-protection</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/iran-post-tipax-snappbox-integration</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/how-to-scope-custom-website-project</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/local-seo-and-google-maps-for-iran-businesses</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://pashalan.ir/blog/zero-to-100-website-launch-and-ranking-roadmap</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.88</priority></url>
+  <url><loc>https://pashalan.ir/blog/google-search-console-ga4-clarity-bing-setup-guide</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.84</priority></url>
+  <url><loc>https://pashalan.ir/blog/geo-aeo-ranking-in-chatgpt-gemini-perplexity</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://pashalan.ir/blog/multi-platform-traffic-instagram-telegram-aparat-torob</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.84</priority></url>
+  <url><loc>https://pashalan.ir/blog/google-ads-retargeting-vs-seo-growth-strategy</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.84</priority></url>
+  <url><loc>https://pashalan.ir/blog/offpage-seo-reportage-and-brand-search-iran</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
+</urlset>
