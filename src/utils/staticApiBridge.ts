@@ -582,9 +582,11 @@ export function installStaticSafeFetchBridge(): void {
     (import.meta as any).env?.VITE_API_BASE_URL || ''
   ).replace(/\/+$/, '');
 
-  // If hosted directly on *.github.io without an external API base, enter static mode immediately
-  // to avoid even a single 404 console error on GitHub Pages!
-  if (!externalApiBase && /\.github\.io$/i.test(window.location.hostname)) {
+  if (
+    !externalApiBase &&
+    (/\.github\.io$/i.test(window.location.hostname) ||
+      /(^|\.)pashalan\.ir$/i.test(window.location.hostname))
+  ) {
     confirmedStaticHost = true;
   }
 

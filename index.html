@@ -191,110 +191,30 @@
         ]
       }
     </script>
+    <link rel="manifest" href="/manifest.webmanifest" />
     <script>
       (function () {
-        var BUILD_VERSION = '2026-11-25-v5';
         try {
-          var prev = localStorage.getItem('pashalan_build_version');
-          if (prev !== BUILD_VERSION) {
-            localStorage.setItem('pashalan_build_version', BUILD_VERSION);
-            if ('serviceWorker' in navigator) {
-              navigator.serviceWorker.getRegistrations().then(function (regs) {
-                for (var i = 0; i < regs.length; i++) {
-                  regs[i].unregister();
-                }
-              });
-            }
-            if ('caches' in window) {
-              caches.keys().then(function (keys) {
-                for (var j = 0; j < keys.length; j++) {
-                  caches.delete(keys[j]);
-                }
-              });
-            }
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+              for (var i = 0; i < regs.length; i++) {
+                regs[i].unregister();
+              }
+            });
+          }
+          if ('caches' in window) {
+            caches.keys().then(function (keys) {
+              for (var j = 0; j < keys.length; j++) {
+                caches.delete(keys[j]);
+              }
+            });
           }
         } catch (e) {}
-
-        window.addEventListener('vite:preloadError', function () {
-          if (!sessionStorage.getItem('pashalan_preload_reloaded')) {
-            sessionStorage.setItem('pashalan_preload_reloaded', '1');
-            window.location.reload();
-          }
-        });
       })();
     </script>
   </head>
-  <body class="bg-[#0B1120] text-slate-900 antialiased selection:bg-blue-600/15 selection:text-blue-800">
-    <div id="root">
-      <div
-        dir="rtl"
-        style="min-height:100vh;background:linear-gradient(135deg,#070b14 0%,#0f172a 55%,#1e1b4b 100%);color:#f8fafc;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;text-align:center;"
-      >
-        <div
-          style="max-width:440px;width:100%;background:rgba(15,23,42,0.88);border:1px solid rgba(59,130,246,0.28);border-radius:20px;padding:28px 24px;box-shadow:0 24px 48px rgba(0,0,0,0.45);"
-        >
-          <div
-            style="width:52px;height:52px;margin:0 auto 14px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:#fff;box-shadow:0 10px 25px rgba(37,99,235,0.4);"
-          >
-            P
-          </div>
-          <div style="font-size:19px;font-weight:900;color:#ffffff;margin-bottom:6px;">
-            پلتفرم مهندسی طراحی سایت پاشالان
-          </div>
-          <div style="font-size:12px;color:#94a3b8;line-height:1.8;margin-bottom:18px;">
-            ۱۴۰ طرح زنده ایرانی • پکیج ویژه دامنه .com و هاست رایگان • مشاور هوش مصنوعی
-          </div>
-          <div
-            id="pashalan-boot-status"
-            style="font-size:12px;font-weight:700;color:#60a5fa;padding:10px 14px;border-radius:12px;background:rgba(37,99,235,0.12);border:1px solid rgba(59,130,246,0.25);"
-          >
-            در حال بارگذاری محیط زنده پاشالان...
-          </div>
-          <div id="pashalan-boot-actions" style="display:none;margin-top:14px;">
-            <button
-              type="button"
-              onclick="(function(){try{if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});}if('caches' in window){caches.keys().then(function(k){k.forEach(function(c){caches.delete(c);});});}}catch(e){}setTimeout(function(){window.location.href='/?v='+Date.now();},250);})()"
-              style="width:100%;padding:12px 16px;border-radius:12px;border:none;background:#2563eb;color:#fff;font-weight:800;font-size:13px;cursor:pointer;"
-            >
-              پاک‌سازی کش مرورگر و ورود به نسخه جدید سایت
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-      setTimeout(function () {
-        if (!window.__PASHALAN_MOUNTED__) {
-          var statusEl = document.getElementById('pashalan-boot-status');
-          var actionsEl = document.getElementById('pashalan-boot-actions');
-          if (statusEl) {
-            statusEl.innerHTML =
-              'نسخه جدید سایت منتشر شده است. در حال پاک‌سازی کش قدیمی مرورگر...';
-          }
-          if (actionsEl) {
-            actionsEl.style.display = 'block';
-          }
-          if (!sessionStorage.getItem('pashalan_auto_hard_reload_v5')) {
-            sessionStorage.setItem('pashalan_auto_hard_reload_v5', '1');
-            try {
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(function (regs) {
-                  for (var i = 0; i < regs.length; i++) regs[i].unregister();
-                });
-              }
-              if ('caches' in window) {
-                caches.keys().then(function (keys) {
-                  for (var j = 0; j < keys.length; j++) caches.delete(keys[j]);
-                });
-              }
-            } catch (e) {}
-            setTimeout(function () {
-              window.location.replace('/?v=' + Date.now());
-            }, 600);
-          }
-        }
-      }, 4500);
-    </script>
+  <body class="bg-[#F8FAFC] text-slate-900 antialiased selection:bg-blue-600/15 selection:text-blue-800">
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
