@@ -92,25 +92,6 @@ export default defineConfig(() => {
     },
     build: {
       sourcemap: false,
-      rollupOptions: {
-        output: {
-          manualChunks(id: string) {
-            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('node_modules/lucide-react')) {
-              return 'icons-vendor';
-            }
-            if (
-              id.includes('megaTemplatesCatalog') ||
-              id.includes('contentPagesData')
-            ) {
-              return 'catalog-data';
-            }
-            return undefined;
-          },
-        },
-      },
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
