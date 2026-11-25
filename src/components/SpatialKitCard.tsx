@@ -55,7 +55,7 @@ export const SpatialKitCard: React.FC<SpatialKitCardProps> = ({
               const target = e.currentTarget;
               if (!target.dataset.fallbackApplied) {
                 target.dataset.fallbackApplied = '1';
-                target.src = '/images/showcase_fintech_exchange_1793284715041.jpg';
+                target.src = '/images/showcase_fintech_exchange_1793284715041.jpg?v=2';
               }
             }}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"

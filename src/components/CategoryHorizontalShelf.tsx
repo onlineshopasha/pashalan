@@ -103,7 +103,6 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
           <button
             type="button"
             onClick={() => handleScroll('left')}
-            aria-label="بعدی"
             className="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black flex items-center gap-1 transition-colors cursor-pointer shadow-lg"
           >
             <span>ورق بزنید ({templates.length.toLocaleString('fa-IR')} طرح)</span>

@@ -1,20 +1,20 @@
 import { SpatialKit, IndustryCategory } from './spatialCatalog';
 
-const heroComPackageImg = '/images/hero_slide_com_package_1795277500340.jpg';
-const heroCustomEngImg = '/images/hero_slide_custom_engineering_1795277500987.jpg';
-const heroGrowthSpeedImg = '/images/hero_slide_growth_speed_1795277500873.jpg';
-const heroReadyTemplatesImg = '/images/hero_slide_ready_templates_1795277501044.jpg';
-const pluginAutomationImg = '/images/plugin_cat_automation_1795286096784.jpg';
-const pluginCommunicationImg = '/images/plugin_cat_communication_1795285926358.jpg';
-const pluginPaymentImg = '/images/plugin_cat_payment_1795285927334.jpg';
-const pluginSalesImg = '/images/plugin_cat_sales_1795286096782.jpg';
-const pluginSecurityImg = '/images/plugin_cat_security_1795285926700.jpg';
-const pluginSeoSpeedImg = '/images/plugin_cat_seo_speed_1795285925292.jpg';
-const showcaseFashionImg = '/images/showcase_fashion_streetwear_1793284711966.jpg';
-const showcaseFintechImg = '/images/showcase_fintech_exchange_1793284715041.jpg';
-const showcaseClinicImg = '/images/showcase_luxury_clinic_1793284712610.jpg';
-const showcaseRealEstateImg = '/images/showcase_real_estate_villa_1793284716020.jpg';
-const showcaseRoasteryImg = '/images/showcase_specialty_roastery_1793284715025.jpg';
+const heroComPackageImg = '/images/hero_slide_com_package_1795277500340.jpg?v=2';
+const heroCustomEngImg = '/images/hero_slide_custom_engineering_1795277500987.jpg?v=2';
+const heroGrowthSpeedImg = '/images/hero_slide_growth_speed_1795277500873.jpg?v=2';
+const heroReadyTemplatesImg = '/images/hero_slide_ready_templates_1795277501044.jpg?v=2';
+const pluginAutomationImg = '/images/plugin_cat_automation_1795286096784.jpg?v=2';
+const pluginCommunicationImg = '/images/plugin_cat_communication_1795285926358.jpg?v=2';
+const pluginPaymentImg = '/images/plugin_cat_payment_1795285927334.jpg?v=2';
+const pluginSalesImg = '/images/plugin_cat_sales_1795286096782.jpg?v=2';
+const pluginSecurityImg = '/images/plugin_cat_security_1795285926700.jpg?v=2';
+const pluginSeoSpeedImg = '/images/plugin_cat_seo_speed_1795285925292.jpg?v=2';
+const showcaseFashionImg = '/images/showcase_fashion_streetwear_1793284711966.jpg?v=2';
+const showcaseFintechImg = '/images/showcase_fintech_exchange_1793284715041.jpg?v=2';
+const showcaseClinicImg = '/images/showcase_luxury_clinic_1793284712610.jpg?v=2';
+const showcaseRealEstateImg = '/images/showcase_real_estate_villa_1793284716020.jpg?v=2';
+const showcaseRoasteryImg = '/images/showcase_specialty_roastery_1793284715025.jpg?v=2';
 
 export interface CategoryShelfDefinition {
   id: Exclude<IndustryCategory, 'all'>;

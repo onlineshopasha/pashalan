@@ -36,7 +36,7 @@ export default defineConfig(() => {
       },
     },
     build: {
-      sourcemap: false,
+      sourcemap: true,
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

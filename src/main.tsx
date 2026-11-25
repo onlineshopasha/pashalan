@@ -1,4 +1,3 @@
-import 'vazirmatn/Vazirmatn-Variable-font-face.css';
 import { createRoot } from 'react-dom/client';
 import { installStaticSafeFetchBridge } from './utils/staticApiBridge';
 import App from './App.tsx';

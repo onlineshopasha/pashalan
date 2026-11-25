@@ -79,7 +79,7 @@ export const HERO_BANNER_SLIDES = [
     title: 'طراحی سایت کامل با دامنه .com رایگان و هاست رایگان فقط ۲۰ میلیون تومان',
     subtitle:
       'اگر می‌خواهید برندتان با اعتبار جهانی (.com) در گوگل بدرخشد، این پکیج شامل طراحی کامل سایت، ثبت دامنه .com رایگان، هاست ابری پرسرعت رایگان، اینماد، درگاه پرداخت و اتصال به ترب با قیمت قطعی ۲۰ میلیون تومان است.',
-    image: '/images/hero_slide_com_package_1795277500340.jpg',
+    image: '/images/hero_slide_com_package_1795277500340.jpg?v=2',
     priceHighlight: '۲۰,۰۰۰,۰۰۰ تومان (قطعی)',
     freeOptions: [
       'دامنه .com رایگان ۱ ساله به نام شما',
@@ -98,7 +98,7 @@ export const HERO_BANNER_SLIDES = [
     title: 'سایت آماده صنف خود را از ۸ تا ۱۸ میلیون با هاست ۶ ماهه و دامنه .ir رایگان تحویل بگیرید',
     subtitle:
       'از میان ۱۴۰ سایت زنده ایرانی در ۷ دسته‌بندی انتخاب کنید؛ تعداد صفحات را از ۱ تا ۱۰ صفحه تنظیم کنید و بدون دردسر فنی، سایت آماده فروش با ۶ ماه هاست رایگان و دامنه .ir رایگان تحویل بگیرید.',
-    image: '/images/hero_slide_ready_templates_1795277501044.jpg',
+    image: '/images/hero_slide_ready_templates_1795277501044.jpg?v=2',
     priceHighlight: '۸ تا ۱۸ میلیون تومان (۱ تا ۱۰ صفحه)',
     freeOptions: [
       '۶ ماه هاست ابری پرسرعت رایگان',
@@ -117,7 +117,7 @@ export const HERO_BANNER_SLIDES = [
     title: 'سایت اختصاصی و اپلیکیشن موبایل دقیقاً مطابق خواسته‌ها و بیزینس‌مدل شما',
     subtitle:
       'هیچ قالب آماده‌ای در کار نیست؛ بر اساس امکانات، فرآیند فروش و اهداف برند شما استعلام قیمت دقیق، زمان‌بندی شفاف و قرارداد رسمی ارائه می‌کنیم تا یک دارایی دیجیتال ماندگار بسازید.',
-    image: '/images/hero_slide_custom_engineering_1795277500987.jpg',
+    image: '/images/hero_slide_custom_engineering_1795277500987.jpg?v=2',
     priceHighlight: 'استعلام قیمت طبق خواسته‌های شما',
     freeOptions: [
       'جلسه مشاوره و برآورد فنی رایگان',
@@ -136,7 +136,7 @@ export const HERO_BANNER_SLIDES = [
     title: 'ما فقط سایت تحویل نمی‌دهیم؛ یک ماشین فروش آنلاین آماده کار تحویل می‌دهیم',
     subtitle:
       'از دریافت اینماد و درگاه اقساطی اسنپ‌پی تا اتصال به ترب، تیپاکس، پیامک OTP کاوه‌نگار و سئوی تکنیکال گوگل؛ همه با سرعت بارگذاری زیر ۱ ثانیه و پشتیبانی مستمر در کنار شما هستیم.',
-    image: '/images/hero_slide_growth_speed_1795277500873.jpg',
+    image: '/images/hero_slide_growth_speed_1795277500873.jpg?v=2',
     priceHighlight: 'امتیاز سرعت +۹۵ در گوگل PageSpeed',
     freeOptions: [
       'راه‌اندازی رایگان درگاه اقساطی اسنپ‌پی و تارا',
@@ -706,15 +706,15 @@ export const OFFICIAL_GUARANTEES: OfficialGuaranteeBadge[] = [
 ];
 
 const ARTICLE_IMAGES = [
-  '/images/hero_slide_com_package_1795277500340.jpg',
-  '/images/hero_slide_ready_templates_1795277501044.jpg',
-  '/images/hero_slide_custom_engineering_1795277500987.jpg',
-  '/images/hero_slide_growth_speed_1795277500873.jpg',
-  '/images/showcase_fintech_exchange_1793284715041.jpg',
-  '/images/showcase_luxury_clinic_1793284712610.jpg',
-  '/images/showcase_fashion_streetwear_1793284711966.jpg',
-  '/images/showcase_real_estate_villa_1793284716020.jpg',
-  '/images/showcase_specialty_roastery_1793284715025.jpg',
+  '/images/hero_slide_com_package_1795277500340.jpg?v=2',
+  '/images/hero_slide_ready_templates_1795277501044.jpg?v=2',
+  '/images/hero_slide_custom_engineering_1795277500987.jpg?v=2',
+  '/images/hero_slide_growth_speed_1795277500873.jpg?v=2',
+  '/images/showcase_fintech_exchange_1793284715041.jpg?v=2',
+  '/images/showcase_luxury_clinic_1793284712610.jpg?v=2',
+  '/images/showcase_fashion_streetwear_1793284711966.jpg?v=2',
+  '/images/showcase_real_estate_villa_1793284716020.jpg?v=2',
+  '/images/showcase_specialty_roastery_1793284715025.jpg?v=2',
 ];
 
 export const BLOG_ARTICLES: BlogArticle[] = [

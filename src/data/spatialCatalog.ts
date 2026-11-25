@@ -111,7 +111,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     secondaryHref: '#order',
     statNumber: '+۴۲۰ پروژه',
     statLabel: 'سایت و اپلیکیشن موفق در سراسر ایران',
-    image: '/images/showcase_fintech_exchange_1793284715041.jpg',
+    image: '/images/showcase_fintech_exchange_1793284715041.jpg?v=2',
     accentColor: '#2563EB',
   },
   {
@@ -131,7 +131,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     secondaryHref: '#calculator',
     statNumber: '۸ تا ۱۸ میلیون',
     statLabel: 'متغیر بر اساس ۱ تا ۱۰ صفحه به انتخاب شما',
-    image: '/images/showcase_fashion_streetwear_1793284711966.jpg',
+    image: '/images/showcase_fashion_streetwear_1793284711966.jpg?v=2',
     accentColor: '#059669',
   },
   {
@@ -151,7 +151,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     secondaryHref: '#free-audit',
     statNumber: '۹۹.۹۸٪ آپتایم',
     statLabel: 'پشتیبانی مستمر و مانیتورینگ ۲۴/۷ سرورها',
-    image: '/images/showcase_luxury_clinic_1793284712610.jpg',
+    image: '/images/showcase_luxury_clinic_1793284712610.jpg?v=2',
     accentColor: '#4F46E5',
   },
 ];
@@ -178,7 +178,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'این طرح ویژه فروشگاه‌های موبایل، لپ‌تاپ، لوازم جانبی و کالاهای مصرفی طراحی شده است. شامل صفحه اصلی داینامیک، صفحه دسته‌بندی با فیلترهای چندگانه، صفحه محصول با جدول مشخصات فنی و نمودار قیمت، سبد خرید ایجکس، تسویه‌حساب تک‌صفحه‌ای، پنل کاربری مشتریان و اتصال آماده به ترب، ایمالز و درگاه‌های پرداخت بانکی و اقساطی است.',
     motionDescription: 'نمایش تعاملی کالاها، سبد خرید آنی ایجکس و محاسبه اقساط ماهانه',
-    image: '/images/showcase_fintech_exchange_1793284715041.jpg',
+    image: '/images/showcase_fintech_exchange_1793284715041.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 12000000,
@@ -274,7 +274,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'طراحی شده برای کلینیک‌های زیبایی، پوست و مو، دندانپزشکی و مطب پزشکان متخصص. بیماران می‌توانند بدون تماس تلفنی، پزشک و ساعت خالی را انتخاب کرده، بیعانه را آنلاین بپردازند و پیامک یادآوری دریافت کنند. شامل گالری مقایسه‌ای قبل و بعد درمان و بخش مشاوره آنلاین است.',
     motionDescription: 'انتخاب پزشک، روز و ساعت نوبت به صورت زنده با صدور کد پیگیری پیامکی',
-    image: '/images/showcase_luxury_clinic_1793284712610.jpg',
+    image: '/images/showcase_luxury_clinic_1793284712610.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 11500000,
@@ -370,7 +370,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'امکان تعریف بی‌نهایت متغیر رنگ، سایز و طرح برای هر لباس؛ جدول راهنمای سایز هوشمند بر اساس قد و وزن مشتری؛ بخش ست کردن لباس‌ها (Shop the Look) و اتصال کامل به درگاه پرداخت مستقیم و اسنپ‌پی.',
     motionDescription: 'تغییر زنده رنگ و سایز پوشاک و بررسی بافت پارچه با بزرگ‌نمایی دقیق',
-    image: '/images/showcase_fashion_streetwear_1793284711966.jpg',
+    image: '/images/showcase_fashion_streetwear_1793284711966.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 10500000,
@@ -466,7 +466,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'دارای سیستم فایلینگ پیشرفته املاک، تفکیک کارشناسان هر منطقه، ماشین‌حساب تبدیل رهن و اجاره، نمایش املاک روی نقشه، گالری ویدیو و تور مجازی ۳۶۰ درجه و فرم سپردن ملک توسط مالکین.',
     motionDescription: 'فیلتر لحظه‌ای املاک بر اساس بودجه، متراژ و محله به همراه محاسبه تبدیل رهن و اجاره',
-    image: '/images/showcase_real_estate_villa_1793284716020.jpg',
+    image: '/images/showcase_real_estate_villa_1793284716020.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 12500000,
@@ -562,7 +562,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'طراحی رسمی و مهندسی با قابلیت تغییر زبان (فارسی، انگلیسی، عربی)، کاتالوگ محصولات صنعتی همراه با جداول دیتاشیت فنی، فرم ثبت سفارش تناژ و درخواست پیش‌فاکتور رسمی، گالری خطوط تولید و گواهینامه‌های ISO.',
     motionDescription: 'نمایش کاتالوگ فنی محصولات، خطوط تولید، گواهینامه‌های ISO و فرم درخواست نمایندگی',
-    image: '/images/showcase_fintech_exchange_1793284715041.jpg',
+    image: '/images/showcase_fintech_exchange_1793284715041.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 10000000,
@@ -658,7 +658,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'شامل منوی تصویری دسته‌بندی‌شده، امکان انتخاب سایز و مخلفات اضافه، محاسبه خودکار هزینه پیک بر اساس محدوده نقشه، اتصال به فیش‌پرینتر حرارتی صندوق و باشگاه مشتریان با کش‌بک خرید بعدی.',
     motionDescription: 'منوی تصویری دسته‌بندی‌شده با امکان شخصی‌سازی سفارش و محاسبه خودکار هزینه پیک',
-    image: '/images/showcase_specialty_roastery_1793284715025.jpg',
+    image: '/images/showcase_specialty_roastery_1793284715025.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 9800000,
@@ -754,7 +754,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'پلتفرم کامل آموزشی با اتصال به اسپاتی‌پلیر و سرویس ویدیو ابری آروان، تعریف سرفصل‌ها و پیش‌نمایش جلسات رایگان، فروش قسطی دوره‌ها، برگزاری آزمون تستی با کارنامه فوری و صدور گواهینامه دیجیتال با کد رهگیری.',
     motionDescription: 'مشاهده سرفصل‌های دوره، پخش نمونه جلسه رایگان و ثبت‌نام آنی با دسترسی خودکار',
-    image: '/images/showcase_luxury_clinic_1793284712610.jpg',
+    image: '/images/showcase_luxury_clinic_1793284712610.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 11800000,
@@ -850,7 +850,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'دارای هسته محاسبه لحظه‌ای قیمت طلا بر اساس مظنه اتحادیه، کیف پول ریالی و طلایی (بر حسب میلی‌گرم)، احراز هویت خودکار کد ملی و تاریخ تولد و شبا، صدور فاکتور رسمی کددار و امکان فروش ویترینی طلا و جواهر با محاسبه خودکار اجرت و سود.',
     motionDescription: 'ماشین‌حساب تبدیل آنی تومان به میلی‌گرم طلا با نمودار زنده و ثبت سفارش در کسری از ثانیه',
-    image: '/images/showcase_fintech_exchange_1793284715041.jpg',
+    image: '/images/showcase_fintech_exchange_1793284715041.jpg?v=2',
     minReadyPriceToman: 9500000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 14500000,
@@ -946,7 +946,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'دارای سیستم فیلتر تخصصی بر اساس نوع پوست (چرب، خشک، مختلط)، برند، ترکیبات موثره و کشور سازنده؛ بخش مشاوره آنلاین با دکتر داروساز یا مشاور پوست؛ نمایش بچ‌کد و مجوز سیب سلامت و اتصال مستقیم به اسنپ‌پی.',
     motionDescription: 'انتخاب روتین پوستی هوشمند و بررسی ترکیبات و مجوز بهداشتی هر محصول',
-    image: '/images/showcase_luxury_clinic_1793284712610.jpg',
+    image: '/images/showcase_luxury_clinic_1793284712610.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 11200000,
@@ -1042,7 +1042,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'امکان تعریف تورهای لحظه آخری، مقایسه قیمت هتل‌های ۳ تا ۵ ستاره روی یک تور، ثبت مشخصات مسافران و تصویر پاسپورت، محاسبه آنلاین اقساط سفر با چک صیادی و راهنمای کامل سفر به شهرها و کشورها.',
     motionDescription: 'فیلتر تورها بر اساس مقصد، تاریخ حرکت و ستاره هتل همراه با صدور پیش‌قرارداد سفر',
-    image: '/images/showcase_real_estate_villa_1793284716020.jpg',
+    image: '/images/showcase_real_estate_villa_1793284716020.jpg?v=2',
     minReadyPriceToman: 8500000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 12800000,
@@ -1138,7 +1138,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'مشتری می‌تواند در صفحه هر مبل یا سرویس چوب، رنگ کلاف چوب (گردویی، فندقی، سفید، طبیعی) و کالیته پارچه (تدی، بوکله، مخمل، چرم) و تعداد نفرات ست را تغییر دهد و قیمت دقیق را ببیند. شامل شرایط فروش چکی و اقساطی.',
     motionDescription: 'شخصی‌سازی رنگ چوب و پارچه مبل به همراه محاسبه ابعاد و شرایط خرید چکی',
-    image: '/images/showcase_fashion_streetwear_1793284711966.jpg',
+    image: '/images/showcase_fashion_streetwear_1793284711966.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 11500000,
@@ -1234,7 +1234,7 @@ export const SPATIAL_KITS: SpatialKit[] = [
     fullSpecifications:
       'طراحی رسمی، سنگین و اعتمادساز؛ ارباب‌رجوع می‌تواند موضوع پرونده (ملکی، خانواده، کیفری، ثبت شرکت، مهاجرت تحصیلی/کاری) را انتخاب کرده، هزینه مشاوره را بپردازد و در ساعت مقرر مشاوره تلفنی یا حضوری دریافت کند.',
     motionDescription: 'رزرو آنلاین وقت مشاوره با وکیل متخصص و تکمیل فرم ارزیابی اولیه پرونده',
-    image: '/images/showcase_fintech_exchange_1793284715041.jpg',
+    image: '/images/showcase_fintech_exchange_1793284715041.jpg?v=2',
     minReadyPriceToman: 8000000,
     maxReadyPriceToman: 18000000,
     readyPriceToman: 9500000,
