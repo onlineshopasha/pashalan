@@ -61,12 +61,12 @@ const REAL_CASE_STUDIES: CaseStudy[] = [
     industry: 'شرکتی دوزبانه + کاتالوگ B2B و استعلام آنلاین',
     categoryId: 'corporate-industrial',
     summary:
-      'طراحی پورتال رسمی با دامنه .com، ساختار سئو شده برای جذب سرنخ‌های صادراتی و هوش مصنوعی پاسخگوی ۲۴ ساعته به خریداران عمده.',
+      'طراحی پورتال رسمی با دامنه .com، کاتالوگ فنی محصولات برای جذب مشتریان صادراتی و دستیار پاسخگوی ۲۴ ساعته به خریداران عمده.',
     beforeSpeed: '۶.۲ ثانیه (امتیاز ۳۴)',
     afterSpeed: '۰.۸ ثانیه (امتیاز ۹۶)',
     beforeConversion: '۴ استعلام / ماه',
     afterConversion: '۲۹ استعلام B2B / ماه',
-    highlightBadge: 'ورود به صفحه اول گوگل و ارجاع در ChatGPT',
+    highlightBadge: '۷ برابر رشد استعلام مشتریان عمده و صادراتی',
     deliverables: ['پکیج ویژه .com رایگان', 'فایروال امنیتی WAF', 'چت‌بات فروش هوشمند'],
   },
 ];
@@ -179,14 +179,14 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 text-emerald-400 text-xs font-extrabold">
               <Layers className="w-4 h-4" />
-              <span>صفحات اختصاصی طراحی سایت برای ۷ صنعت کلیدی ایران (سئو شده)</span>
+              <span>بخش‌های تخصصی طراحی سایت برای ۷ صنعت کلیدی ایران</span>
             </div>
             <h2 className="text-lg sm:text-xl font-extrabold">
               دقیقاً به دنبال طراحی سایت برای کدام صنف هستید؟
             </h2>
           </div>
-          <span className="text-xs text-slate-400">
-            هر صنف دارای ۲۰ دموی زنده واقعی + متاتگ و اسکیما اختصاصی گوگل
+          <span className="text-xs text-slate-300">
+            هر صنف دارای ۲۰ دموی زنده قابل تست با نام و لوگوی برند شماست
           </span>
         </div>
 

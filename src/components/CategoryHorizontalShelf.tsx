@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -46,16 +46,32 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
   onOpenFullScreen,
 }) => {
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const [showAllCards, setShowAllCards] = useState<boolean>(false);
   const readyPrice = calculateReadyPlanPriceByPages(selectedPageCount);
 
   const handleScroll = (dir: 'right' | 'left') => {
-    if (!trackRef.current) return;
-    const offset = dir === 'left' ? -680 : 680;
-    trackRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    if (!showAllCards) {
+      setShowAllCards(true);
+    }
+    setTimeout(() => {
+      if (!trackRef.current) return;
+      const offset = dir === 'left' ? -680 : 680;
+      trackRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    }, 10);
   };
 
+  const renderedTemplates = showAllCards ? templates : templates.slice(0, 4);
+
   return (
-    <div className="bg-[#11141E] border border-white/10 rounded-3xl p-4 sm:p-6 shadow-xl space-y-4 text-white">
+    <div
+      onMouseEnter={() => {
+        if (!showAllCards) setShowAllCards(true);
+      }}
+      onTouchStart={() => {
+        if (!showAllCards) setShowAllCards(true);
+      }}
+      className="bg-[#11141E] border border-white/10 rounded-3xl p-4 sm:p-6 shadow-xl space-y-4 text-white"
+    >
       {/* Shelf Header: Category Title + 20 Live Iranian Templates Badge + Left/Right Swipe Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-white/10">
         <div className="space-y-1">
@@ -73,7 +89,7 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
 
         {/* Fixed Swipe Buttons for this Category Row */}
         <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
-          <span className="text-[11px] text-slate-400 hidden md:inline">
+          <span className="text-[11px] text-slate-300 hidden md:inline">
             ورق زدن ۲۰ سایت زنده ایرانی این دسته:
           </span>
           <button
@@ -90,7 +106,7 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
             aria-label="بعدی"
             className="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black flex items-center gap-1 transition-colors cursor-pointer shadow-lg"
           >
-            <span>ورق بزنید</span>
+            <span>ورق بزنید ({templates.length.toLocaleString('fa-IR')} طرح)</span>
             <ChevronLeft className="w-4 h-4" />
           </button>
         </div>
@@ -99,10 +115,13 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
       {/* Horizontal Cards Track (20 Real Iranian Live Cards per Row) */}
       <div
         ref={trackRef}
+        onScroll={() => {
+          if (!showAllCards) setShowAllCards(true);
+        }}
         className="flex items-stretch gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth"
         style={{ scrollbarWidth: 'thin' }}
       >
-        {templates.map((kit, idx) => {
+        {renderedTemplates.map((kit, idx) => {
           const displayPrice =
             pricingMode === 'ready-kit' ? readyPrice : kit.customPriceToman;
           const liveUrl = kit.liveReferenceUrl || kit.realExternalDemoUrl;
@@ -147,7 +166,7 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
                         <Heart className="w-2.5 h-2.5 fill-rose-400" />
                         {likesCount}
                       </span>
-                      <span className="hidden sm:flex items-center gap-0.5 text-slate-400">
+                      <span className="hidden sm:flex items-center gap-0.5 text-slate-300">
                         <Eye className="w-2.5 h-2.5" />
                         {viewsCount}k
                       </span>
@@ -160,7 +179,10 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
                     <img
                       src={kit.image}
                       alt={kit.title}
+                      width={360}
+                      height={225}
                       loading="lazy"
+                      decoding="async"
                       referrerPolicy="no-referrer"
                       className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-70"
                     />
@@ -169,10 +191,7 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
                     {/* Mini Website Top Header Inside Preview */}
                     <div className="relative z-10 px-2.5 py-1.5 bg-slate-950/80 backdrop-blur-xs border-b border-white/10 flex items-center justify-between gap-1">
                       <div className="flex items-center gap-1.5 min-w-0">
-                        <span
-                          className="w-4 h-4 rounded-md text-[9px] font-black text-white flex items-center justify-center shrink-0"
-                          style={{ backgroundColor: kit.sandboxTheme.accent }}
-                        >
+                        <span className="w-4 h-4 rounded-md text-[9px] font-black text-white bg-slate-800 border border-white/20 flex items-center justify-center shrink-0">
                           {brandLabel.slice(0, 1)}
                         </span>
                         <span className="text-[10px] font-black text-white truncate">
@@ -183,7 +202,7 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
                         {kit.sandboxTheme.navLinks.slice(0, 2).map((nav) => (
                           <span
                             key={nav}
-                            className="text-[8.5px] text-slate-300 bg-white/10 px-1.5 py-0.5 rounded truncate max-w-[68px]"
+                            className="text-[8.5px] text-slate-200 bg-white/10 px-1.5 py-0.5 rounded truncate max-w-[68px]"
                           >
                             {nav}
                           </span>
@@ -194,10 +213,7 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
                     {/* Mini Website Hero Headline + 2 Real Topic Product Pills */}
                     <div className="relative z-10 p-2.5 space-y-1.5">
                       <div className="flex items-center justify-between gap-1">
-                        <span
-                          className="px-1.5 py-0.5 rounded text-[8.5px] font-black text-white"
-                          style={{ backgroundColor: kit.sandboxTheme.accent }}
-                        >
+                        <span className="px-1.5 py-0.5 rounded text-[8.5px] font-black text-white bg-slate-900/95 border border-white/25">
                           کد {kit.code} · {kit.referenceBrandFa || cleanHost}
                         </span>
                         <a
@@ -239,9 +255,9 @@ export const CategoryHorizontalShelf: React.FC<CategoryHorizontalShelfProps> = (
                 {/* Card Title & Price Row */}
                 <div className="pt-3 px-1 space-y-1.5">
                   <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-white font-black text-xs sm:text-sm truncate leading-tight">
+                    <div className="text-white font-black text-xs sm:text-sm truncate leading-tight">
                       {kit.title}
-                    </h4>
+                    </div>
                     <span className="px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-black text-[11px] font-mono tabular-nums shadow shrink-0">
                       {pricingMode === 'ready-kit'
                         ? `${(displayPrice / 1000000).toFixed(1)} م.ت`

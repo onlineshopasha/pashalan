@@ -215,7 +215,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                 onClick={() => setDykCategory(cat)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors whitespace-nowrap ${
                   dykCategory === cat
-                    ? 'bg-amber-600 text-white'
+                    ? 'bg-slate-900 text-white'
                     : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
                 }`}
               >
@@ -265,12 +265,12 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 space-y-7">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div className="space-y-1.5 max-w-3xl">
-              <div className="text-xs font-bold text-blue-600 flex items-center gap-1.5">
+              <div className="text-xs font-bold text-blue-700 flex items-center gap-1.5">
                 <BookOpen className="w-4 h-4" />
-                <span>مرکز دانش و نقشه راه صفر تا ۱۰۰ ({BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی)</span>
+                <span>مرکز دانش و راهنمای تخصصی کسب‌وکار آنلاین ({BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله کاربردی)</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی طراحی سایت، سئو گوگل، هوش مصنوعی (GEO) و رشد در پلتفرم‌ها
+                {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی طراحی سایت، بهینه‌سازی موتور جستجو و رشد فروش اینترنتی
               </h2>
             </div>
 
@@ -295,7 +295,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                   onClick={() => setArticleCategory(cat)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors whitespace-nowrap ${
                     articleCategory === cat
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-slate-900 text-white'
                       : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
@@ -308,6 +308,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
               <Search className="w-4 h-4 text-slate-400 shrink-0" />
               <input
                 type="text"
+                aria-label="جستجو در مقالات تخصصی"
                 value={articleSearch}
                 onChange={(e) => setArticleSearch(e.target.value)}
                 placeholder={`جستجو در ${BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله...`}
@@ -335,8 +336,8 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                     />
                   </div>
                   <div className="p-4 space-y-2">
-                    <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-                      <span className="font-mono font-bold text-slate-400">
+                    <div className="flex items-center gap-1.5 text-[11px] text-slate-600">
+                      <span className="font-mono font-bold text-slate-600">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <span aria-hidden="true">·</span>

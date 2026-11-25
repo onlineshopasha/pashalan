@@ -131,6 +131,28 @@ export default function App() {
   const [activeHomeSectionRoute, setActiveHomeSectionRoute] = useState<
     null | 'domain-checker' | 'ai-studio' | 'calculator' | 'tracker'
   >(null);
+  const [belowFoldReady, setBelowFoldReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (belowFoldReady) return;
+    if (activeHomeSectionRoute) {
+      setBelowFoldReady(true);
+      return;
+    }
+    const enableNow = () => setBelowFoldReady(true);
+    const timer = window.setTimeout(enableNow, 1800);
+    window.addEventListener('scroll', enableNow, { passive: true, once: true });
+    window.addEventListener('pointerdown', enableNow, { passive: true, once: true });
+    window.addEventListener('touchstart', enableNow, { passive: true, once: true });
+    window.addEventListener('keydown', enableNow, { passive: true, once: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', enableNow);
+      window.removeEventListener('pointerdown', enableNow);
+      window.removeEventListener('touchstart', enableNow);
+      window.removeEventListener('keydown', enableNow);
+    };
+  }, [belowFoldReady, activeHomeSectionRoute]);
 
   // Sync clean URL paths (/templates, /tools, /plugin/:slug, /industry/:id, /blog/:slug, /domain-checker, /ai-studio, /calculator, /tracker, /services, /about, /contact, /auth) + legacy hash redirects
   useEffect(() => {
@@ -745,7 +767,7 @@ export default function App() {
               <div className="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none">
                 پاشالان <span className="text-blue-600 font-mono text-xs">Pashalan.ir</span>
               </div>
-              <span className="text-[10px] text-slate-500 font-bold block mt-0.5">
+              <span className="text-[10px] text-slate-600 font-bold block mt-0.5">
                 ۱۴۰ سایت زنده · هاست ۶ ماهه و دامنه .ir رایگان
               </span>
             </button>
@@ -880,10 +902,10 @@ export default function App() {
                       </span>
                     </div>
 
-                    <h1 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 leading-[1.28] tracking-tight">
+                    <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 leading-[1.28] tracking-tight">
                       طرح آماده یا اختصاصی صنف خودتان را{' '}
                       <span className="text-blue-600">زنده تست کنید</span> و ۴۸ ساعته تحویل بگیرید
-                    </h1>
+                    </h2>
 
                     <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed">
                       بیش از <strong className="text-slate-900">۱۴۰ سایت کامل و زنده</strong> در ۷ دسته‌بندی مختلف (هر دسته ۲۰ طرح مجزا). قیمت طرح‌های آماده از{' '}
@@ -899,6 +921,7 @@ export default function App() {
                         <Sparkles className="w-5 h-5 text-emerald-400 mr-1 shrink-0" />
                         <input
                           type="text"
+                          aria-label="نام برند یا شرکت برای اعمال زنده روی طرح‌ها"
                           value={customBrandName}
                           onChange={(e) => setCustomBrandName(e.target.value)}
                           placeholder="نام برند یا شرکت خود را بنویسید تا روی تمام ۱۴۰ سایت زنده اعمال شود..."
@@ -965,6 +988,7 @@ export default function App() {
                       <Search className="w-4 h-4 text-slate-400 mr-2 shrink-0" />
                       <input
                         type="text"
+                        aria-label="جستجو در بین ۱۴۰ طرح زنده"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="جستجو در بین ۱۴۰ طرح (مثلاً: موبایل، کلینیک، طلا، املاک، رستوران، وکالت...)"
@@ -1209,6 +1233,8 @@ export default function App() {
               </div>
             </section>
 
+            {belowFoldReady && (
+              <>
             {/* 1.5 TRUMP CARDS: Free Options + .com 20M + 5s Brand Logo Share + Speed/Loss Calc + Before/After + Contract */}
             <TrumpCardsSection
               customBrandName={customBrandName}
@@ -1235,7 +1261,7 @@ export default function App() {
                       <h2 className="text-base sm:text-xl font-extrabold text-slate-900">
                         تنظیم تعداد صفحات طرح آماده (۱ تا ۱۰ صفحه: ۸ تا ۱۸ میلیون تومان)
                       </h2>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-slate-600 mt-0.5">
                         با تغییر تعداد صفحات، قیمت تمام ۱۴۰ طرح زیر به صورت لحظه‌ای بروزرسانی می‌شود.
                       </p>
                     </div>
@@ -1249,13 +1275,14 @@ export default function App() {
                       </div>
                       <input
                         type="range"
+                        aria-label="تعداد صفحات طرح آماده"
                         min={1}
                         max={10}
                         value={selectedPageCount}
                         onChange={(e) => setSelectedPageCount(Number(e.target.value))}
                         className="w-full accent-blue-600 cursor-pointer"
                       />
-                      <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+                      <div className="flex justify-between text-[10px] text-slate-600 font-bold font-mono">
                         <span>۱ صفحه (۸ میلیون)</span>
                         <span>۵ صفحه (۱۲.۵ میلیون)</span>
                         <span>۱۰ صفحه (۱۸ میلیون)</span>
@@ -1410,7 +1437,11 @@ export default function App() {
                             </span>
                           </div>
                           <h3 className="text-lg font-extrabold">{customTier.title}</h3>
-                          <div className="text-base sm:text-lg font-extrabold text-amber-500">
+                          <div
+                            className={`text-base sm:text-lg font-extrabold ${
+                              isHighlighted ? 'text-amber-300' : 'text-blue-700'
+                            }`}
+                          >
                             {customTier.priceRangeLabel}
                           </div>
                           <p className="text-xs opacity-85 leading-relaxed">
@@ -1522,7 +1553,7 @@ export default function App() {
                             <span className="font-bold text-blue-700">
                               {srv.categoryBadge}
                             </span>
-                            <span className="text-slate-400">{srv.billingCycle}</span>
+                            <span className="text-slate-600 font-semibold">{srv.billingCycle}</span>
                           </div>
                           <h3 className="text-base font-extrabold text-slate-900">
                             {srv.title}
@@ -1679,6 +1710,8 @@ export default function App() {
                 <PageSeoContentBlock page="home" />
               </div>
             </section>
+              </>
+            )}
           </>
         )}
 
@@ -1701,6 +1734,7 @@ export default function App() {
                   <span className="text-xs">تعداد صفحات:</span>
                   <input
                     type="range"
+                    aria-label="تعداد صفحات طرح آماده"
                     min={1}
                     max={10}
                     value={selectedPageCount}
@@ -2008,6 +2042,7 @@ export default function App() {
                     <input
                       type="text"
                       required
+                      aria-label="نام و نام خانوادگی"
                       value={authForm.fullName}
                       onChange={(e) =>
                         setAuthForm({ ...authForm, fullName: e.target.value })
@@ -2019,6 +2054,7 @@ export default function App() {
                       type="tel"
                       required
                       dir="ltr"
+                      aria-label="شماره موبایل"
                       value={authForm.phone}
                       onChange={(e) =>
                         setAuthForm({ ...authForm, phone: e.target.value })
@@ -2111,7 +2147,7 @@ export default function App() {
 
           <div className="space-y-2.5">
             <div className="text-xs font-extrabold text-white">صفحات اصلی و ابزارها</div>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2">
               {[
                 { href: '/', label: 'صفحه اصلی پاشالان', action: () => navigateToPage('home') },
                 { href: '/templates', label: 'گالری ۱۴۰ طرح آماده زنده', action: () => navigateToPage('templates') },
@@ -2128,7 +2164,7 @@ export default function App() {
                       e.preventDefault();
                       lnk.action();
                     }}
-                    className="text-slate-400 hover:text-emerald-400 transition-colors"
+                    className="inline-flex items-center min-h-[28px] py-1 text-slate-300 hover:text-emerald-400 transition-colors"
                   >
                     {lnk.label}
                   </a>
@@ -2139,7 +2175,7 @@ export default function App() {
 
           <div className="space-y-2.5">
             <div className="text-xs font-extrabold text-white">لینک مستقیم طراحی سایت ۷ صنف</div>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2">
               {CATEGORY_SHELVES.map((shelf) => (
                 <li key={shelf.id}>
                   <a
@@ -2148,7 +2184,7 @@ export default function App() {
                       e.preventDefault();
                       openIndustryLanding(shelf.id as Exclude<IndustryCategory, 'all'>);
                     }}
-                    className="text-slate-400 hover:text-emerald-400 transition-colors"
+                    className="inline-flex items-center min-h-[28px] py-1 text-slate-300 hover:text-emerald-400 transition-colors"
                   >
                     طراحی سایت {shelf.title} (۲۰ طرح زنده)
                   </a>
@@ -2159,9 +2195,9 @@ export default function App() {
 
           <div className="space-y-2.5">
             <div className="text-xs font-extrabold text-white">خدمات، آموزش و نقشه سایت</div>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2">
               {[
-                { href: '/services', label: 'خدمات صفر تا ۱۰۰ سئو، GEO و رشد پلتفرم‌ها', action: () => navigateToPage('services') },
+                { href: '/services', label: 'خدمات پشتیبانی فنی، تولید محتوا و توسعه سایت', action: () => navigateToPage('services') },
                 { href: '/blog', label: `${BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی + ۲۰ آیا می‌دانید و ۲۰ پرسش‌وپاسخ`, action: () => navigateToPage('blog') },
                 { href: '/about', label: 'درباره پاشالان و مطالعات موردی', action: () => navigateToPage('about') },
                 { href: '/contact', label: 'تماس مستقیم و رزرو مشاوره رایگان', action: () => navigateToPage('contact') },
@@ -2174,16 +2210,16 @@ export default function App() {
                       e.preventDefault();
                       lnk.action();
                     }}
-                    className="text-slate-400 hover:text-emerald-400 transition-colors"
+                    className="inline-flex items-center min-h-[28px] py-1 text-slate-300 hover:text-emerald-400 transition-colors"
                   >
                     {lnk.label}
                   </a>
                 </li>
               ))}
-              <li className="pt-1 flex flex-wrap gap-3 text-[11px] font-mono text-slate-500">
-                <a href="/sitemap.xml" className="hover:text-emerald-400">sitemap.xml</a>
-                <a href="/robots.txt" className="hover:text-emerald-400">robots.txt</a>
-                <a href="/llms.txt" className="hover:text-emerald-400">llms.txt</a>
+              <li className="pt-1 flex flex-wrap gap-3 text-[11px] font-mono text-slate-300">
+                <a href="/sitemap.xml" className="inline-flex items-center min-h-[28px] py-1 hover:text-emerald-400">sitemap.xml</a>
+                <a href="/robots.txt" className="inline-flex items-center min-h-[28px] py-1 hover:text-emerald-400">robots.txt</a>
+                <a href="/llms.txt" className="inline-flex items-center min-h-[28px] py-1 hover:text-emerald-400">llms.txt</a>
               </li>
             </ul>
           </div>

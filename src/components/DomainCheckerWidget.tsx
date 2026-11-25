@@ -123,10 +123,10 @@ export const DomainCheckerWidget: React.FC<DomainCheckerWidgetProps> = ({
             <Globe className="w-4 h-4" />
             <span>استعلام آنلاین و ۱۰۰٪ زنده آزاد بودن دامنه (متصل به RDAP و DNS جهانی)</span>
           </div>
-          <h3 className="text-lg sm:text-2xl font-extrabold text-slate-900">
+          <h2 className="text-lg sm:text-2xl font-extrabold text-slate-900">
             همین الان چک کنید دامنه <span dir="ltr" className="font-mono text-blue-700">.com</span> یا{' '}
             <span dir="ltr" className="font-mono text-emerald-700">.ir</span> برندتان آزاد است؟
-          </h3>
+          </h2>
           <p className="text-xs text-slate-600">
             نام برندتان را به انگلیسی وارد کنید تا وضعیت واقعی ۶ پسوند پرطرفدار را زنده از رجیستری بررسی کنیم؛ در پکیج ۲۰ میلیونی، دامنه <span dir="ltr" className="font-mono font-bold">.com</span> و هاست کاملاً رایگان است.
           </p>
@@ -153,6 +153,7 @@ export const DomainCheckerWidget: React.FC<DomainCheckerWidgetProps> = ({
           <input
             type="text"
             dir="ltr"
+            aria-label="نام دامنه یا برند برای استعلام آزاد بودن"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="مثلاً: mybrand یا pashalan.com"

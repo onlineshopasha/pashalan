@@ -76,20 +76,6 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- AI Knowledge & Generative Engine Endpoints (GEO/AEO) -->
-  <url>
-    <loc>https://pashalan.ir/llms.txt</loc>
-    <lastmod>2026-11-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://pashalan.ir/llms-full.txt</loc>
-    <lastmod>2026-11-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
   <!-- 7 Clean Programmatic Industry Landing Routes (Exact Real Category IDs) -->
   <url><loc>https://pashalan.ir/industry/ecommerce-shop</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
   <url><loc>https://pashalan.ir/industry/clinic-wellness</loc><lastmod>2026-11-22</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>

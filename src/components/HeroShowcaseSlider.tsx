@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   ChevronRight,
   ChevronLeft,
@@ -23,15 +23,6 @@ export const HeroShowcaseSlider: React.FC<HeroShowcaseSliderProps> = ({
   onOpenCustomInquiry,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % HERO_BANNER_SLIDES.length);
-    }, 6500);
-    return () => clearInterval(timer);
-  }, [isPaused]);
 
   const currentSlide = HERO_BANNER_SLIDES[activeIndex];
 
@@ -62,11 +53,7 @@ export const HeroShowcaseSlider: React.FC<HeroShowcaseSliderProps> = ({
   };
 
   return (
-    <section
-      className="w-full bg-[#090D16] text-white border-b border-slate-800"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <section className="w-full bg-[#090D16] text-white border-b border-slate-800">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 py-6 sm:py-8 space-y-5">
         {/* Main Full-Width Editorial Slider Frame — Single Crisp Photo Per Slide */}
         <div className="relative w-full rounded-3xl overflow-hidden border border-white/15 bg-slate-950 shadow-2xl min-h-[460px] sm:min-h-[500px] grid grid-cols-1 lg:grid-cols-12 items-stretch">
@@ -139,14 +126,18 @@ export const HeroShowcaseSlider: React.FC<HeroShowcaseSliderProps> = ({
             </div>
           </div>
 
-          {/* Left Visual Column (RTL): Single Clean Full-Height Photograph (No Collage) */}
-          <div className="lg:col-span-6 relative min-h-[260px] lg:min-h-full bg-slate-900 overflow-hidden">
+          {/* Left Visual Column (RTL): Single Clean Full-Height Photograph (Zero CLS) */}
+          <div className="lg:col-span-6 relative h-[260px] sm:h-[320px] lg:h-auto lg:min-h-[500px] bg-slate-900 overflow-hidden">
             <img
               key={currentSlide.id}
               src={currentSlide.image}
               alt={currentSlide.title}
+              width={720}
+              height={405}
+              fetchPriority="high"
+              decoding="async"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover transition-opacity duration-500"
+              className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
 

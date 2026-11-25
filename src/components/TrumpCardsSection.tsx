@@ -212,12 +212,14 @@ export const TrumpCardsSection: React.FC<TrumpCardsSectionProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input
                 type="text"
+                aria-label="نام برند شما برای پیش‌نمایش زنده"
                 value={customBrandName}
                 onChange={(e) => onChangeCustomBrand(e.target.value)}
                 placeholder="نام برند شما (مثلاً: فروشگاه زرین)"
                 className="px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-emerald-400"
               />
               <select
+                aria-label="انتخاب صنف و حوزه فعالیت برند"
                 value={brandIndustry}
                 onChange={(e) => setBrandIndustry(e.target.value)}
                 className="px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-xs text-white focus:outline-none focus:border-emerald-400 cursor-pointer"
@@ -452,6 +454,7 @@ export const TrumpCardsSection: React.FC<TrumpCardsSectionProps> = ({
                   </div>
                   <input
                     type="range"
+                    aria-label="تعداد بازدیدکننده روزانه سایت یا اینستاگرام"
                     min={50}
                     max={2000}
                     step={50}
@@ -470,6 +473,7 @@ export const TrumpCardsSection: React.FC<TrumpCardsSectionProps> = ({
                   </div>
                   <input
                     type="range"
+                    aria-label="میانگین مبلغ هر خرید یا قرارداد به تومان"
                     min={500000}
                     max={15000000}
                     step={500000}
@@ -623,6 +627,7 @@ export const TrumpCardsSection: React.FC<TrumpCardsSectionProps> = ({
                 </div>
                 <input
                   type="range"
+                  aria-label="اسلایدر مقایسه وضعیت قبل و بعد از بازطراحی"
                   min={5}
                   max={95}
                   value={sliderPos}

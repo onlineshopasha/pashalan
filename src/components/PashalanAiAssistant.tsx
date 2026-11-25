@@ -1047,6 +1047,7 @@ export const PashalanAiConsultantSection: React.FC<{
             </label>
             <textarea
               rows={2}
+              aria-label="توضیحات یا سوال اختصاصی شما"
               value={customNote}
               onChange={(e) => setCustomNote(e.target.value)}
               placeholder="مثلاً: حدود ۳۰۰ محصول پوشاک دارم و می‌خواهم به ترب و اسنپ‌پی وصل شوم..."
@@ -1204,6 +1205,7 @@ export const PashalanAiConsultantSection: React.FC<{
             </button>
             <input
               type="text"
+              aria-label="سوال تکمیلی از مشاور هوش مصنوعی پاشالان"
               value={followUpInput}
               onChange={(e) => setFollowUpInput(e.target.value)}
               placeholder={
