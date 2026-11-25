@@ -17,12 +17,12 @@ import {
 } from 'lucide-react';
 import { PluginCategoryId, ProPluginItem } from '../data/pluginsCatalog';
 
-import coverPayment from '../assets/images/plugin_cat_payment_1795285927334.jpg';
-import coverSales from '../assets/images/plugin_cat_sales_1795286096782.jpg';
-import coverSeoSpeed from '../assets/images/plugin_cat_seo_speed_1795285925292.jpg';
-import coverAutomation from '../assets/images/plugin_cat_automation_1795286096784.jpg';
-import coverSecurity from '../assets/images/plugin_cat_security_1795285926700.jpg';
-import coverCommunication from '../assets/images/plugin_cat_communication_1795285926358.jpg';
+const coverPayment = '/images/plugin_cat_payment_1795285927334.jpg';
+const coverSales = '/images/plugin_cat_sales_1795286096782.jpg';
+const coverSeoSpeed = '/images/plugin_cat_seo_speed_1795285925292.jpg';
+const coverAutomation = '/images/plugin_cat_automation_1795286096784.jpg';
+const coverSecurity = '/images/plugin_cat_security_1795285926700.jpg';
+const coverCommunication = '/images/plugin_cat_communication_1795285926358.jpg';
 
 const CATEGORY_COVERS: Record<Exclude<PluginCategoryId, 'all'>, string> = {
   payment: coverPayment,

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import {
   Search,
   Check,
@@ -64,56 +64,16 @@ import {
   applyDynamicSeoMetadata,
 } from './utils/seoManager';
 
-const CostCalculatorSection = lazy(() =>
-  import('./components/CostCalculatorSection').then((m) => ({
-    default: m.CostCalculatorSection,
-  }))
-);
-const KnowledgeFaqSection = lazy(() =>
-  import('./components/KnowledgeFaqSection').then((m) => ({
-    default: m.KnowledgeFaqSection,
-  }))
-);
-const AiGrowthToolsStudio = lazy(() =>
-  import('./components/AiGrowthToolsStudio').then((m) => ({
-    default: m.AiGrowthToolsStudio,
-  }))
-);
-const ShoppingCartDrawer = lazy(() =>
-  import('./components/ShoppingCartDrawer').then((m) => ({
-    default: m.ShoppingCartDrawer,
-  }))
-);
-const QuickOrderModal = lazy(() =>
-  import('./components/QuickOrderModal').then((m) => ({
-    default: m.QuickOrderModal,
-  }))
-);
-const LiveSandboxModal = lazy(() =>
-  import('./components/LiveSandboxModal').then((m) => ({
-    default: m.LiveSandboxModal,
-  }))
-);
-const ToolsHubPage = lazy(() =>
-  import('./components/ToolsHubPage').then((m) => ({
-    default: m.ToolsHubPage,
-  }))
-);
-const PluginDetailPage = lazy(() =>
-  import('./components/PluginDetailPage').then((m) => ({
-    default: m.PluginDetailPage,
-  }))
-);
-const ContactPage = lazy(() =>
-  import('./components/ContactPage').then((m) => ({
-    default: m.ContactPage,
-  }))
-);
-const AdminPanelModal = lazy(() =>
-  import('./components/AdminPanelModal').then((m) => ({
-    default: m.AdminPanelModal,
-  }))
-);
+import { CostCalculatorSection } from './components/CostCalculatorSection';
+import { KnowledgeFaqSection } from './components/KnowledgeFaqSection';
+import { AiGrowthToolsStudio } from './components/AiGrowthToolsStudio';
+import { ShoppingCartDrawer } from './components/ShoppingCartDrawer';
+import { QuickOrderModal } from './components/QuickOrderModal';
+import { LiveSandboxModal } from './components/LiveSandboxModal';
+import { ToolsHubPage } from './components/ToolsHubPage';
+import { PluginDetailPage } from './components/PluginDetailPage';
+import { ContactPage } from './components/ContactPage';
+import { AdminPanelModal } from './components/AdminPanelModal';
 export type ActivePageView =
   | 'home'
   | 'templates'

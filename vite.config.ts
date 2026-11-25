@@ -31,6 +31,7 @@ export default defineConfig(() => {
       tailwindcss(),
       githubPagesSpaFallbackPlugin(),
       VitePWA({
+        selfDestroying: true,
         registerType: 'autoUpdate',
         includeAssets: [
           'icon.svg',
