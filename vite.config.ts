@@ -20,14 +20,16 @@ function githubPagesSpaFallbackPlugin() {
       }
 
       // Permanent anti-white-screen protection:
-      // Create backward-compatible copies for all previous hashed filenames so
-      // if ArvanCloud CDN or a user's mobile browser serves a cached index.html,
-      // the requested JS/CSS file still exists (HTTP 200) and never white-screens.
+      // Copy main JS/CSS bundle to all historical entry filenames AND /assets/app.js
+      // so if ArvanCloud CDN or a user's mobile browser serves a cached index.html,
+      // the requested entry file always returns HTTP 200 and mounts cleanly.
       const assetsDir = path.join(distDir, 'assets');
-      if (fs.existsSync(assetsDir)) {
-        const files = fs.readdirSync(assetsDir);
-        const mainJs = files.find((f) => f.endsWith('.js') && !f.endsWith('.map'));
-        const mainCss = files.find((f) => f.endsWith('.css'));
+      if (fs.existsSync(assetsDir) && fs.existsSync(indexHtml)) {
+        const htmlContent = fs.readFileSync(indexHtml, 'utf8');
+        const jsMatch = htmlContent.match(/\/assets\/(index-[A-Za-z0-9_-]+\.js)/);
+        const cssMatch = htmlContent.match(/\/assets\/(index-[A-Za-z0-9_-]+\.css)/);
+        const mainJs = jsMatch ? jsMatch[1] : null;
+        const mainCss = cssMatch ? cssMatch[1] : null;
 
         const legacyJsNames = [
           'app.js',
@@ -89,13 +91,6 @@ export default defineConfig(() => {
     },
     build: {
       sourcemap: false,
-      rollupOptions: {
-        output: {
-          entryFileNames: 'assets/app.js',
-          chunkFileNames: 'assets/[name].js',
-          assetFileNames: 'assets/app.[ext]',
-        },
-      },
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

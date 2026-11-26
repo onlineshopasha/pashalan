@@ -88,6 +88,7 @@ export type ActivePageView =
 export default function App() {
   // Multi-Page Navigation State
   const [activePage, setActivePage] = useState<ActivePageView>('home');
+  const [selectedCategory, setSelectedCategory] = useState<IndustryCategory>('all');
   const [selectedBlogArticle, setSelectedBlogArticle] = useState<BlogArticle | null>(
     null
   );
@@ -372,7 +373,6 @@ export default function App() {
     'ready-kit'
   );
   const [selectedPageCount, setSelectedPageCount] = useState<number>(5);
-  const [selectedCategory, setSelectedCategory] = useState<IndustryCategory>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Hero Interactive Category Preview State
