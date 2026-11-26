@@ -5,8 +5,12 @@ export interface BlogArticle {
   category: string;
   readTime: string;
   publishDate: string;
+  isoDate?: string;
   author: string;
   authorRole: string;
+  reviewedBy?: string;
+  searchIntentQuery?: string;
+  humanExperienceNote?: string;
   image: string;
   excerpt: string;
   keyTakeaways: string[];

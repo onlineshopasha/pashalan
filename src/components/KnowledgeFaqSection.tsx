@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Lightbulb,
   BookOpen,
@@ -8,13 +8,27 @@ import {
   Search,
   ChevronRight,
   Check,
+  ShieldCheck,
+  UserCheck,
+  TrendingUp,
+  Sparkles,
 } from 'lucide-react';
 import {
   DID_YOU_KNOW_FACTS,
   COMPREHENSIVE_FAQS,
   BLOG_ARTICLES,
   BlogArticle,
+  DidYouKnowItem,
+  FaqItem,
 } from '../data/contentPagesData';
+
+interface AutoEditorialFeedPayload {
+  lastUpdatedJalali?: string;
+  activeTrendingQueries?: string[];
+  articles?: BlogArticle[];
+  didYouKnowFacts?: DidYouKnowItem[];
+  faqs?: FaqItem[];
+}
 
 interface KnowledgeFaqSectionProps {
   mode: 'home-preview' | 'full-blog-page';
@@ -36,15 +50,66 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
   const [dykCategory, setDykCategory] = useState<string>('همه');
   const [openFaqId, setOpenFaqId] = useState<string>(COMPREHENSIVE_FAQS[0].id);
   const [showAllDyk, setShowAllDyk] = useState<boolean>(mode === 'full-blog-page');
+  const [liveFeed, setLiveFeed] = useState<AutoEditorialFeedPayload | null>(null);
+
+  useEffect(() => {
+    fetch('/data/auto-editorial-feed.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: AutoEditorialFeedPayload | null) => {
+        if (data && typeof data === 'object') {
+          setLiveFeed(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const allArticles = useMemo(() => {
+    const autoList = liveFeed?.articles || [];
+    const seen = new Set<string>();
+    const merged: BlogArticle[] = [];
+    for (const art of [...autoList, ...BLOG_ARTICLES]) {
+      if (!seen.has(art.slug)) {
+        seen.add(art.slug);
+        merged.push(art);
+      }
+    }
+    return merged;
+  }, [liveFeed]);
+
+  const allDykFacts = useMemo(() => {
+    const autoDyk = liveFeed?.didYouKnowFacts || [];
+    const seen = new Set<string>();
+    const merged: DidYouKnowItem[] = [];
+    for (const item of [...autoDyk, ...DID_YOU_KNOW_FACTS]) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id);
+        merged.push(item);
+      }
+    }
+    return merged;
+  }, [liveFeed]);
+
+  const allFaqs = useMemo(() => {
+    const autoFaqs = liveFeed?.faqs || [];
+    const seen = new Set<string>();
+    const merged: FaqItem[] = [];
+    for (const item of [...autoFaqs, ...COMPREHENSIVE_FAQS]) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id);
+        merged.push(item);
+      }
+    }
+    return merged;
+  }, [liveFeed]);
 
   const articleCategories = useMemo(
-    () => ['همه', ...Array.from(new Set(BLOG_ARTICLES.map((a) => a.category)))],
-    []
+    () => ['همه', ...Array.from(new Set(allArticles.map((a) => a.category)))],
+    [allArticles]
   );
 
   const dykCategories = useMemo(
-    () => ['همه', ...Array.from(new Set(DID_YOU_KNOW_FACTS.map((f) => f.category)))],
-    []
+    () => ['همه', ...Array.from(new Set(allDykFacts.map((f) => f.category)))],
+    [allDykFacts]
   );
 
   const faqCategories = useMemo(
@@ -61,32 +126,33 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
 
   const filteredArticles = useMemo(() => {
     const q = articleSearch.trim().toLowerCase();
-    return BLOG_ARTICLES.filter((a) => {
+    return allArticles.filter((a) => {
       const catMatch =
         articleCategory === 'همه' || a.category === articleCategory;
       const searchMatch =
         !q ||
         a.title.toLowerCase().includes(q) ||
         a.excerpt.toLowerCase().includes(q) ||
-        a.category.toLowerCase().includes(q);
+        a.category.toLowerCase().includes(q) ||
+        (a.searchIntentQuery && a.searchIntentQuery.toLowerCase().includes(q));
       return catMatch && searchMatch;
     });
-  }, [articleCategory, articleSearch]);
+  }, [allArticles, articleCategory, articleSearch]);
 
   const visibleArticles =
     mode === 'home-preview' ? filteredArticles.slice(0, 8) : filteredArticles;
 
   const filteredFaqs = useMemo(() => {
-    return COMPREHENSIVE_FAQS.filter(
+    return allFaqs.filter(
       (f) => faqCategory === 'همه' || f.category === faqCategory
     );
-  }, [faqCategory]);
+  }, [allFaqs, faqCategory]);
 
   const filteredDyk = useMemo(() => {
-    return DID_YOU_KNOW_FACTS.filter(
+    return allDykFacts.filter(
       (f) => dykCategory === 'همه' || f.category === dykCategory
     );
-  }, [dykCategory]);
+  }, [allDykFacts, dykCategory]);
 
   const visibleDyk =
     showAllDyk || dykCategory !== 'همه'
@@ -113,10 +179,10 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
               className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold inline-flex items-center gap-1.5 cursor-pointer"
             >
               <ChevronRight className="w-4 h-4" />
-              <span>بازگشت به آرشیو {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی</span>
+              <span>بازگشت به آرشیو {allArticles.length.toLocaleString('fa-IR')} مقاله تخصصی</span>
             </button>
 
-            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
               <span className="font-bold text-blue-700">
                 {selectedArticle.category}
               </span>
@@ -124,15 +190,37 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
               <span>{selectedArticle.readTime}</span>
               <span aria-hidden="true">·</span>
               <span>تاریخ انتشار: {selectedArticle.publishDate}</span>
-              <span aria-hidden="true">·</span>
-              <span>
-                نویسنده: {selectedArticle.author} ({selectedArticle.authorRole})
-              </span>
             </div>
 
             <h1 className="text-xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
               {selectedArticle.title}
             </h1>
+
+            {/* Google E-E-A-T Author & Human Editorial Review Box */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div className="flex items-start gap-2.5">
+                <UserCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-extrabold text-slate-900">
+                    نویسنده: {selectedArticle.author}
+                  </div>
+                  <div className="text-slate-600 mt-0.5">
+                    {selectedArticle.authorRole}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-extrabold text-slate-900">
+                    بازبینی علمی و فنی: {selectedArticle.reviewedBy || 'هیئت تحریریه مهندسی پاشالان'}
+                  </div>
+                  <div className="text-slate-600 mt-0.5">
+                    {selectedArticle.humanExperienceNote || 'تدوین‌شده بر اساس تجربه اجرایی پروژه‌های واقعی در بازار ایران'}
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="rounded-2xl overflow-hidden border border-slate-200 aspect-[16/9] bg-slate-100">
               <img
@@ -145,7 +233,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
 
             <div className="bg-blue-50/70 border border-blue-200 rounded-2xl p-5 space-y-2.5">
               <div className="text-xs font-extrabold text-blue-900">
-                نکات کلیدی این مقاله:
+                نکات کلیدی و خلاصه اجرایی این مقاله:
               </div>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-800">
                 {selectedArticle.keyTakeaways.map((kt) => (
@@ -189,10 +277,10 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
             <div className="space-y-1.5 max-w-3xl">
               <div className="text-xs font-bold text-amber-700 flex items-center gap-1.5">
                 <Lightbulb className="w-4 h-4" />
-                <span>آیا می‌دانید؟ و دانستنی‌های طلایی راه‌اندازی و رشد سایت ({DID_YOU_KNOW_FACTS.length.toLocaleString('fa-IR')} نکته)</span>
+                <span>آیا می‌دانید؟ و دانستنی‌های طلایی راه‌اندازی و رشد سایت ({allDykFacts.length.toLocaleString('fa-IR')} نکته)</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                {DID_YOU_KNOW_FACTS.length.toLocaleString('fa-IR')} حقیقت و دانستنی کلیدی برای راه‌اندازی، دیده‌شدن و رتبه‌گیری سایت
+                {allDykFacts.length.toLocaleString('fa-IR')} حقیقت و دانستنی کلیدی برای راه‌اندازی، دیده‌شدن و رتبه‌گیری سایت
               </h2>
             </div>
 
@@ -203,7 +291,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
             >
               {showAllDyk
                 ? 'نمایش خلاصه (۶ مورد)'
-                : `مشاهده هر ${DID_YOU_KNOW_FACTS.length.toLocaleString('fa-IR')} مورد آیا می‌دانید`}
+                : `مشاهده هر ${allDykFacts.length.toLocaleString('fa-IR')} مورد آیا می‌دانید`}
             </button>
           </div>
 
@@ -256,7 +344,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
       </section>
 
       {/* ================================================================= */}
-      {/* 2. 20 PROFESSIONAL SEO ARTICLES (۲۰ مقاله تخصصی و کاربردی)          */}
+      {/* 2. PROFESSIONAL SEO ARTICLES (مقالات تخصصی با استاندارد E-E-A-T)     */}
       {/* ================================================================= */}
       <section
         id="articles-hub"
@@ -267,10 +355,10 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
             <div className="space-y-1.5 max-w-3xl">
               <div className="text-xs font-bold text-blue-700 flex items-center gap-1.5">
                 <BookOpen className="w-4 h-4" />
-                <span>مرکز دانش و راهنمای تخصصی کسب‌وکار آنلاین ({BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله کاربردی)</span>
+                <span>مرکز دانش و تحریریه تخصصی کسب‌وکار آنلاین ({allArticles.length.toLocaleString('fa-IR')} مقاله کاربردی)</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی طراحی سایت، بهینه‌سازی موتور جستجو و رشد فروش اینترنتی
+                {allArticles.length.toLocaleString('fa-IR')} مقاله تخصصی طراحی سایت، بهینه‌سازی موتور جستجو و رشد فروش اینترنتی
               </h2>
             </div>
 
@@ -280,10 +368,50 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                 onClick={onNavigateToBlog}
                 className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white text-xs font-extrabold cursor-pointer self-start shrink-0 transition-colors"
               >
-                مشاهده کامل هر {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی ←
+                مشاهده کامل هر {allArticles.length.toLocaleString('fa-IR')} مقاله تخصصی ←
               </button>
             )}
           </div>
+
+          {/* Live Google Suggest Search Intent Bar (E-E-A-T Compliant) */}
+          {liveFeed && liveFeed.activeTrendingQueries && liveFeed.activeTrendingQueries.length > 0 && (
+            <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 space-y-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 text-xs font-extrabold text-emerald-900">
+                  <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>موضوعات پرتکرار جستجوی روز در گوگل (پوشش داده‌شده توسط تیم تحریریه فنی پاشالان با استاندارد E-E-A-T):</span>
+                </div>
+                <span className="text-[11px] font-bold text-emerald-800 bg-white border border-emerald-200 px-2.5 py-0.5 rounded-lg">
+                  نگارش انسانی و بازبینی مهندسی
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {liveFeed.activeTrendingQueries.slice(0, 8).map((q) => (
+                  <button
+                    key={q}
+                    type="button"
+                    onClick={() => {
+                      const matched = allArticles.find(
+                        (a) =>
+                          a.searchIntentQuery === q ||
+                          a.title.includes(q) ||
+                          q.split(' ').some((w) => w.length > 3 && a.title.includes(w))
+                      );
+                      if (matched) {
+                        handleCardClick(matched);
+                      } else {
+                        setArticleCategory('همه مقالات');
+                        setArticleSearch(q);
+                      }
+                    }}
+                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-600 hover:text-white border border-emerald-200 text-[11px] font-bold text-slate-700 transition-colors cursor-pointer"
+                  >
+                    🔍 {q}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Filter & Search Bar */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-3">
@@ -311,7 +439,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                 aria-label="جستجو در مقالات تخصصی"
                 value={articleSearch}
                 onChange={(e) => setArticleSearch(e.target.value)}
-                placeholder={`جستجو در ${BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله...`}
+                placeholder={`جستجو در ${allArticles.length.toLocaleString('fa-IR')} مقاله...`}
                 className="w-full bg-transparent text-xs text-slate-900 focus:outline-none"
               />
             </div>
@@ -353,6 +481,10 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                     <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
                       {art.excerpt}
                     </p>
+                    <div className="pt-1 flex items-center gap-1 text-[11px] text-emerald-700 font-bold">
+                      <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                      <span className="truncate">{art.author} · {art.publishDate}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="px-4 py-3 border-t border-slate-200/80 flex items-center justify-between text-xs font-extrabold text-blue-600">
@@ -372,7 +504,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                   onClick={onNavigateToBlog}
                   className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm cursor-pointer transition-colors"
                 >
-                  مشاهده باقی مقالات (کل {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی) ←
+                  مشاهده باقی مقالات (کل {allArticles.length.toLocaleString('fa-IR')} مقاله تخصصی) ←
                 </button>
               </div>
             )}
@@ -380,7 +512,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
       </section>
 
       {/* ================================================================= */}
-      {/* 3. COMPREHENSIVE CATEGORIZED FAQ (۱۲ پرسش و پاسخ متداول)            */}
+      {/* 3. COMPREHENSIVE CATEGORIZED FAQ (پرسش و پاسخ متداول)              */}
       {/* ================================================================= */}
       <section
         id="faq-section"
@@ -391,7 +523,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
             <div className="space-y-1.5 max-w-3xl">
               <div className="text-xs font-bold text-blue-600 flex items-center gap-1.5">
                 <HelpCircle className="w-4 h-4" />
-                <span>پرسش و پاسخ جامع ({COMPREHENSIVE_FAQS.length.toLocaleString('fa-IR')} پرسش کلیدی)</span>
+                <span>پرسش و پاسخ جامع ({allFaqs.length.toLocaleString('fa-IR')} پرسش کلیدی)</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 پاسخ شفاف به سوالات راه‌اندازی، دیده‌شدن، سئو گوگل، هوش مصنوعی و تعرفه‌ها

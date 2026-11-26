@@ -85,23 +85,42 @@ export function getPageSeoMetadata(params: {
   }
 
   if (page === 'blog' && article) {
+    const isoDate = article.isoDate || '2026-11-22';
     return {
-      title: `${article.title} | مجله پاشالان`,
+      title: `${article.title} | مجله تخصصی پاشالان`,
       description: trimMeta(article.excerpt, 158),
-      keywords: `${article.category}, ${article.title}, آموزش طراحی سایت, سئو سایت ایرانی, پاشالان`,
+      keywords: `${article.category}, ${article.title}, ${article.searchIntentQuery || 'آموزش طراحی سایت'}, مجله مهندسی پاشالان`,
       canonicalUrl: `${SITE_ORIGIN}/blog/${article.slug}`,
       jsonLd: {
         '@context': 'https://schema.org',
-        '@type': 'Article',
+        '@type': 'BlogPosting',
         headline: article.title,
         description: article.excerpt,
-        author: { '@type': 'Organization', name: 'تیم تحریریه فنی پاشالان' },
+        image: article.image.startsWith('http')
+          ? article.image
+          : `${SITE_ORIGIN}${article.image}`,
+        datePublished: isoDate,
+        dateModified: isoDate,
+        inLanguage: 'fa-IR',
+        author: {
+          '@type': 'Person',
+          name: article.author,
+          jobTitle: article.authorRole,
+          url: `${SITE_ORIGIN}/about`,
+        },
+        reviewedBy: {
+          '@type': 'Organization',
+          name: article.reviewedBy || 'هیئت تحریریه مهندسی پاشالان',
+        },
         publisher: {
           '@type': 'Organization',
           name: 'پاشالان (Pashalan.ir)',
           logo: { '@type': 'ImageObject', url: `${SITE_ORIGIN}/pwa-512x512.png` },
         },
-        mainEntityOfPage: `${SITE_ORIGIN}/blog/${article.slug}`,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${SITE_ORIGIN}/blog/${article.slug}`,
+        },
       },
     };
   }

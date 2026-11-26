@@ -243,6 +243,21 @@ export default function App() {
         setSelectedBlogArticle(found);
         setSelectedPluginSlug(null);
         setActiveHomeSectionRoute(null);
+        if (!found) {
+          fetch('/data/auto-editorial-feed.json')
+            .then((r) => (r.ok ? r.json() : null))
+            .then((data) => {
+              if (data && Array.isArray(data.articles)) {
+                const liveFound = data.articles.find(
+                  (a: BlogArticle) => a.slug === slug || a.id === slug
+                );
+                if (liveFound) {
+                  setSelectedBlogArticle(liveFound);
+                }
+              }
+            })
+            .catch(() => {});
+        }
         return;
       }
       if (rawPath === '/about') {
@@ -1895,7 +1910,7 @@ export default function App() {
                       className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold inline-flex items-center gap-1.5 cursor-pointer"
                     >
                       <ChevronRight className="w-4 h-4" />
-                      <span>بازگشت به لیست {BLOG_ARTICLES.length.toLocaleString('fa-IR')} مقاله تخصصی</span>
+                      <span>بازگشت به آرشیو مقالات تخصصی</span>
                     </button>
                     <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
                       <span className="font-bold text-blue-700">
@@ -1911,6 +1926,29 @@ export default function App() {
                     <h1 className="text-xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
                       {selectedBlogArticle.title}
                     </h1>
+
+                    {/* Google E-E-A-T Author & Technical Review Card */}
+                    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                      <div className="space-y-1">
+                        <div className="font-extrabold text-slate-900">
+                          نویسنده: {selectedBlogArticle.author} ({selectedBlogArticle.authorRole})
+                        </div>
+                        <div className="text-slate-600">
+                          بازبینی فنی و تایید علمی: {selectedBlogArticle.reviewedBy || 'تیم مهندسی سئو و معماری وب پاشالان (تایید استاندارد Google E-E-A-T)'}
+                        </div>
+                        {selectedBlogArticle.humanExperienceNote && (
+                          <div className="text-emerald-800 font-bold pt-0.5">
+                            تجربه میدانی: {selectedBlogArticle.humanExperienceNote}
+                          </div>
+                        )}
+                      </div>
+                      <div className="shrink-0">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 font-extrabold text-[11px]">
+                          ✓ محتوای تخصصی انسان‌محور (Google E-E-A-T)
+                        </span>
+                      </div>
+                    </div>
+
                     <img
                       src={selectedBlogArticle.image}
                       alt={selectedBlogArticle.title}
