@@ -212,6 +212,23 @@
               }
             });
           }
+          // Self-heal if a cached index.html references an outdated JS chunk
+          window.addEventListener(
+            'error',
+            function (ev) {
+              var t = ev && ev.target;
+              if (t && t.tagName === 'SCRIPT' && t.src && t.src.indexOf('/assets/') !== -1) {
+                if (!window.__pashalanFallbackLoaded) {
+                  window.__pashalanFallbackLoaded = true;
+                  var s = document.createElement('script');
+                  s.type = 'module';
+                  s.src = '/assets/app.js?v=' + Date.now();
+                  document.head.appendChild(s);
+                }
+              }
+            },
+            true
+          );
         } catch (e) {}
       })();
     </script>

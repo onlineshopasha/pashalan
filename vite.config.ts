@@ -18,6 +18,58 @@ function githubPagesSpaFallbackPlugin() {
       if (fs.existsSync(distDir)) {
         fs.writeFileSync(noJekyllFile, '');
       }
+
+      // Permanent anti-white-screen protection:
+      // Create backward-compatible copies for all previous hashed filenames so
+      // if ArvanCloud CDN or a user's mobile browser serves a cached index.html,
+      // the requested JS/CSS file still exists (HTTP 200) and never white-screens.
+      const assetsDir = path.join(distDir, 'assets');
+      if (fs.existsSync(assetsDir)) {
+        const files = fs.readdirSync(assetsDir);
+        const mainJs = files.find((f) => f.endsWith('.js') && !f.endsWith('.map'));
+        const mainCss = files.find((f) => f.endsWith('.css'));
+
+        const legacyJsNames = [
+          'app.js',
+          'index.js',
+          'index-BhacnjE9.js',
+          'index-BIFUKSbS.js',
+          'index-BvjG_j24.js',
+          'index-BfPKz33B.js',
+          'index-CUXg0d1S.js',
+          'index-CObQ4Yic.js',
+          'index-Bbr3Ptoe.js',
+          'index-DYLn_9Uj.js',
+        ];
+        const legacyCssNames = [
+          'app.css',
+          'index.css',
+          'index-zK14iApv.css',
+          'index-xqO56WEK.css',
+          'index-DVa64PmZ.css',
+          'index-BjjXo4zz.css',
+          'index-CJlvsXUw.css',
+        ];
+
+        if (mainJs) {
+          const srcJs = path.join(assetsDir, mainJs);
+          for (const alias of legacyJsNames) {
+            const dest = path.join(assetsDir, alias);
+            if (dest !== srcJs) {
+              fs.copyFileSync(srcJs, dest);
+            }
+          }
+        }
+        if (mainCss) {
+          const srcCss = path.join(assetsDir, mainCss);
+          for (const alias of legacyCssNames) {
+            const dest = path.join(assetsDir, alias);
+            if (dest !== srcCss) {
+              fs.copyFileSync(srcCss, dest);
+            }
+          }
+        }
+      }
     },
   };
 }
@@ -36,7 +88,14 @@ export default defineConfig(() => {
       },
     },
     build: {
-      sourcemap: true,
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          entryFileNames: 'assets/app.js',
+          chunkFileNames: 'assets/[name].js',
+          assetFileNames: 'assets/app.[ext]',
+        },
+      },
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
