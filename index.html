@@ -212,23 +212,40 @@
               }
             });
           }
-          // Self-heal if a cached index.html references an outdated JS chunk
+          // Self-heal if a cached index.html references an outdated JS/CSS chunk
+          var recoverApp = function () {
+            if (window.__pashalanFallbackLoaded) return;
+            window.__pashalanFallbackLoaded = true;
+            var ts = Date.now();
+            var l = document.createElement('link');
+            l.rel = 'stylesheet';
+            l.href = '/assets/app.css?v=' + ts;
+            document.head.appendChild(l);
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = '/assets/app.js?v=' + ts;
+            document.head.appendChild(s);
+          };
           window.addEventListener(
             'error',
             function (ev) {
               var t = ev && ev.target;
-              if (t && t.tagName === 'SCRIPT' && t.src && t.src.indexOf('/assets/') !== -1) {
-                if (!window.__pashalanFallbackLoaded) {
-                  window.__pashalanFallbackLoaded = true;
-                  var s = document.createElement('script');
-                  s.type = 'module';
-                  s.src = '/assets/app.js?v=' + Date.now();
-                  document.head.appendChild(s);
-                }
+              if (
+                t &&
+                ((t.tagName === 'SCRIPT' && t.src && t.src.indexOf('/assets/') !== -1) ||
+                  (t.tagName === 'LINK' && t.href && t.href.indexOf('/assets/') !== -1))
+              ) {
+                recoverApp();
               }
             },
             true
           );
+          setTimeout(function () {
+            var rootEl = document.getElementById('root');
+            if (rootEl && rootEl.childNodes.length === 0) {
+              recoverApp();
+            }
+          }, 3500);
         } catch (e) {}
       })();
     </script>
