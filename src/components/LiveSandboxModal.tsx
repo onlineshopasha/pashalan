@@ -97,7 +97,6 @@ export const LiveSandboxModal: React.FC<LiveSandboxModalProps> = ({
   >('real-iran-iframe');
   const [iframeLoaded, setIframeLoaded] = useState<boolean>(false);
   const [currentIranLiveUrl, setCurrentIranLiveUrl] = useState<string>('');
-  const [injectedSrcDoc, setInjectedSrcDoc] = useState<string | null>(null);
   const [barsVisible, setBarsVisible] = useState<boolean>(true);
   const lastScrollTopRef = React.useRef<number>(0);
 
@@ -172,80 +171,15 @@ export const LiveSandboxModal: React.FC<LiveSandboxModalProps> = ({
   }, [kit, initialPageCount, initialTab]);
 
   // Fetch proxied HTML and inject scroll/wheel listener so scrolling inside the live Iranian website
-  // automatically hides the top/bottom bars on scroll down and reveals them on scroll up
+  // Fast non-blocking timeout so loading pill disappears smoothly
   useEffect(() => {
     if (!kit || !currentIranLiveUrl || liveSubView !== 'real-iran-iframe') {
-      setInjectedSrcDoc(null);
       return;
     }
-    let cancelled = false;
-    setInjectedSrcDoc(null);
-    const proxyUrl = `https://www.pashalan.com/api/live-site-proxy?url=${encodeURIComponent(
-      currentIranLiveUrl
-    )}`;
-
-    fetch(proxyUrl)
-      .then((res) => (res.ok ? res.text() : Promise.reject(new Error('Failed'))))
-      .then((html) => {
-        if (cancelled || !html || html.length < 200) return;
-        const scrollBridgeScript = `
-<script>
-(function(){
-  var lastY = 0;
-  var touchStartY = 0;
-  window.addEventListener('scroll', function(){
-    var y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (y > lastY + 12 && y > 40) {
-      window.parent.postMessage({ type: 'PASHA_LIVE_SCROLL', dir: 'down' }, '*');
-    } else if (y < lastY - 12 || y <= 15) {
-      window.parent.postMessage({ type: 'PASHA_LIVE_SCROLL', dir: 'up' }, '*');
-    }
-    lastY = y;
-  }, { passive: true });
-  window.addEventListener('wheel', function(e){
-    if (e.deltaY > 10) {
-      window.parent.postMessage({ type: 'PASHA_LIVE_SCROLL', dir: 'down' }, '*');
-    } else if (e.deltaY < -10) {
-      window.parent.postMessage({ type: 'PASHA_LIVE_SCROLL', dir: 'up' }, '*');
-    }
-  }, { passive: true });
-  window.addEventListener('touchstart', function(e){
-    if (e.touches && e.touches[0]) touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-  window.addEventListener('touchmove', function(e){
-    if (!e.touches || !e.touches[0]) return;
-    var dy = touchStartY - e.touches[0].clientY;
-    if (dy > 18) {
-      window.parent.postMessage({ type: 'PASHA_LIVE_SCROLL', dir: 'down' }, '*');
-      touchStartY = e.touches[0].clientY;
-    } else if (dy < -18) {
-      window.parent.postMessage({ type: 'PASHA_LIVE_SCROLL', dir: 'up' }, '*');
-      touchStartY = e.touches[0].clientY;
-    }
-  }, { passive: true });
-})();
-</script>`;
-        const hasBase = /<base\s/i.test(html);
-        const baseTag = hasBase ? '' : `<base href="${currentIranLiveUrl}/">`;
-        const modified = html.includes('</head>')
-          ? html.replace('</head>', `${baseTag}${scrollBridgeScript}</head>`)
-          : `${baseTag}${scrollBridgeScript}${html}`;
-        setInjectedSrcDoc(modified);
-        setIframeLoaded(true);
-      })
-      .catch(() => {
-        // Fallback to direct proxy src if fetch fails
-        if (!cancelled) setInjectedSrcDoc(null);
-      });
-
     const timer = setTimeout(() => {
-      if (!cancelled) setIframeLoaded(true);
-    }, 2400);
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
+      setIframeLoaded(true);
+    }, 2200);
+    return () => clearTimeout(timer);
   }, [kit, currentIranLiveUrl, liveSubView]);
 
   // Listen to scroll direction messages from inside the live iframe
@@ -325,12 +259,42 @@ export const LiveSandboxModal: React.FC<LiveSandboxModalProps> = ({
   );
   const snappPayInstallment = Math.round(cartTotalToman / 4);
 
-  const proxyIframeSrc = `https://www.pashalan.com/api/live-site-proxy?url=${encodeURIComponent(
-    currentIranLiveUrl
-  )}`;
   const cleanLiveHost = currentIranLiveUrl
     .replace(/^https?:\/\/(www\.)?/, '')
-    .replace(/\/$/, '');
+    .replace(/\/.*$/, '');
+  const DIRECT_EMBED_SAFE_HOSTS = [
+    'paziresh24.com',
+    'banimode.com',
+    'khanoumi.com',
+    'alibaba.ir',
+    'milli.gold',
+    'snappfood.ir',
+    'parasteh.com',
+    'digistyle.com',
+    'atrafshan.ir',
+    'dorsa.net',
+    'golsetan.com',
+    'petabad.com',
+    'lamizcoffee.com',
+    'zariniran.com',
+    'chidaneh.com',
+    'ninibazar.com',
+    'mobile140.com',
+    'keshmoon.com',
+    'sportland.ir',
+    'lavazemtahrir.com',
+    'carma-sport.com',
+    'isfahanhonar.com',
+    'badalijatshop.ir',
+  ];
+  const canEmbedDirectly = DIRECT_EMBED_SAFE_HOSTS.some(
+    (h) => cleanLiveHost === h || cleanLiveHost.endsWith(`.${h}`)
+  );
+  const effectiveIframeSrc = canEmbedDirectly
+    ? currentIranLiveUrl
+    : `https://www.pashalan.com/api/live-site-proxy?url=${encodeURIComponent(
+        currentIranLiveUrl
+      )}`;
 
   const handleBrandInput = (val: string) => {
     setCustomBrandName(val);
@@ -532,25 +496,14 @@ export const LiveSandboxModal: React.FC<LiveSandboxModalProps> = ({
                   : 'w-full flex-1'
               }`}
             >
-              {injectedSrcDoc ? (
-                <iframe
-                  key={`${currentIranLiveUrl}-srcdoc`}
-                  srcDoc={injectedSrcDoc}
-                  title={kit.title}
-                  onLoad={() => setIframeLoaded(true)}
-                  className="w-full flex-1 h-full border-0 bg-white"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                />
-              ) : (
-                <iframe
-                  key={`${currentIranLiveUrl}-src`}
-                  src={proxyIframeSrc}
-                  title={kit.title}
-                  onLoad={() => setIframeLoaded(true)}
-                  className="w-full flex-1 h-full border-0 bg-white"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                />
-              )}
+              <iframe
+                key={effectiveIframeSrc}
+                src={effectiveIframeSrc}
+                title={kit.title}
+                onLoad={() => setIframeLoaded(true)}
+                className="w-full flex-1 h-full border-0 bg-white"
+                referrerPolicy="no-referrer"
+              />
             </div>
           </div>
         )}

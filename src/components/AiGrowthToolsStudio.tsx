@@ -986,7 +986,7 @@ export const AiGrowthToolsStudio: React.FC<AiGrowthToolsStudioProps> = ({
                   </button>
                   <a
                     href={`https://wa.me/?text=${encodeURIComponent(
-                      `سلام! اگر قصد طراحی سایت حرفه‌ای با دامنه .com و هاست رایگان دارید، با کد معرف اختصاصی من (${referralData.code}) در پاشالان (pashalan.ir) ۱ میلیون تومان تخفیف بگیرید. شماره مشاوره: 09197254078`
+                      `سلام! اگر قصد طراحی سایت حرفه‌ای با دامنه .com و هاست رایگان دارید، با کد معرف اختصاصی من (${referralData.code}) در پاشالان (pashalan.ir) ۱ میلیون تومان تخفیف بگیرید.`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

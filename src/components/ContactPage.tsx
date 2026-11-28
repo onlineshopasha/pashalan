@@ -27,8 +27,6 @@ interface ContactPageProps {
   onOpenFloatingAi: () => void;
 }
 
-const DIRECT_PHONE_RAW = '09197254078';
-const DIRECT_PHONE_DISPLAY = '0919 725 4078';
 const DIRECT_PHONE_TEL = 'tel:+989197254078';
 const DIRECT_WHATSAPP_BASE = 'https://wa.me/989197254078';
 
@@ -57,7 +55,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   aiHandlers,
   onOpenFloatingAi,
 }) => {
-  const [copiedPhone, setCopiedPhone] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState(SUBJECT_OPTIONS[0]);
@@ -69,12 +66,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
-
-  const handleCopyPhone = () => {
-    navigator.clipboard?.writeText(DIRECT_PHONE_RAW).catch(() => {});
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2200);
-  };
 
   const whatsappQuickUrl = `${DIRECT_WHATSAPP_BASE}?text=${encodeURIComponent(
     `سلام، از سایت پاشالان برای مشاوره در مورد «${subject}» پیام می‌دهم.`
@@ -115,7 +106,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         setSubmittedRef(data.lead?.id || `LEAD-${Date.now().toString().slice(-4)}`);
       }
     } catch {
-      setErrorMsg('ارتباط با سرور برقرار نشد. می‌توانید مستقیماً با 09197254078 تماس بگیرید.');
+      setErrorMsg('ارتباط با سرور برقرار نشد. لطفاً از طریق آیکون تماس مستقیم یا واتساپ اقدام کنید.');
     } finally {
       setSubmitting(false);
     }
@@ -172,7 +163,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   </div>
                   <div>
                     <div className="text-xs font-extrabold text-emerald-300">
-                      شماره تماس مستقیم و واتساپ
+                      خط ویژه مشاوره و تماس مستقیم
                     </div>
                     <div className="text-[11px] text-slate-400">
                       مشاوره، سفارش فوری و پشتیبانی VIP
@@ -185,30 +176,27 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-900/90 border border-white/10 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center shrink-0">
+                    <PhoneCall className="w-5 h-5" />
+                  </span>
+                  <div className="text-right">
+                    <div className="text-sm font-black text-white">
+                      ارتباط مستقیم با مشاور ارشد
+                    </div>
+                    <div className="text-[11px] text-slate-400">
+                      پاسخگویی سریع همه‌روزه از ساعت ۹ تا ۲۲
+                    </div>
+                  </div>
+                </div>
                 <a
                   href={DIRECT_PHONE_TEL}
-                  dir="ltr"
-                  className="text-2xl sm:text-3xl font-mono font-black tracking-wider text-white hover:text-emerald-300 transition-colors"
+                  aria-label="برقراری تماس مستقیم"
+                  className="px-3.5 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-black inline-flex items-center gap-1.5 shrink-0 transition-colors"
                 >
-                  {DIRECT_PHONE_DISPLAY}
+                  <PhoneCall className="w-3.5 h-3.5" />
+                  <span>تماس</span>
                 </a>
-                <button
-                  type="button"
-                  onClick={handleCopyPhone}
-                  className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white cursor-pointer inline-flex items-center gap-1.5 shrink-0"
-                >
-                  {copiedPhone ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-300">کپی شد</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>کپی</span>
-                    </>
-                  )}
-                </button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -249,8 +237,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               <div className="text-sm font-extrabold text-slate-900">
                 تماس مستقیم با کارشناس
               </div>
-              <div dir="ltr" className="text-sm font-mono font-black text-emerald-700 mt-1 text-right">
-                {DIRECT_PHONE_DISPLAY}
+              <div className="text-xs font-extrabold text-emerald-700 mt-1 inline-flex items-center gap-1.5">
+                <PhoneCall className="w-3.5 h-3.5" />
+                <span>برقراری تماس فوری (کلیک کنید)</span>
               </div>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
                 همه‌روزه از ساعت ۹ صبح تا ۲۲ شب حتی روزهای تعطیل برای پروژه‌های فوری.
@@ -374,7 +363,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     className="px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold inline-flex items-center gap-2"
                   >
                     <PhoneCall className="w-4 h-4" />
-                    <span>تماس {DIRECT_PHONE_DISPLAY}</span>
+                    <span>تماس مستقیم تلفنی</span>
                   </a>
                   <button
                     type="button"
@@ -593,16 +582,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 <span>تضمین آرامش خاطر کارفرمایان پاشالان</span>
               </div>
               <p className="text-xs sm:text-sm leading-relaxed text-emerald-50">
-                کلیه مکاتبات و سفارش‌ها مستقیم زیر نظر تیم فنی پاشالان پیگیری می‌شود. برای هماهنگی سریع همین حالا با شماره{' '}
-                <a
-                  href={DIRECT_PHONE_TEL}
-                  dir="ltr"
-                  className="font-mono font-black underline text-white"
-                >
-                  {DIRECT_PHONE_DISPLAY}
-                </a>{' '}
-                تماس بگیرید.
+                کلیه مکاتبات و سفارش‌ها مستقیم زیر نظر تیم فنی پاشالان پیگیری می‌شود. برای هماهنگی سریع همین حالا روی دکمه تماس مستقیم کلیک کنید.
               </p>
+              <a
+                href={DIRECT_PHONE_TEL}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-emerald-900 hover:bg-emerald-50 font-black text-xs transition-colors"
+              >
+                <PhoneCall className="w-4 h-4" />
+                <span>برقراری تماس مستقیم</span>
+              </a>
             </div>
           </div>
         </section>

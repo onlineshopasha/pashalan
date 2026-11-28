@@ -65,9 +65,15 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
 
   const allArticles = useMemo(() => {
     const autoList = liveFeed?.articles || [];
+    const pillarArticle = BLOG_ARTICLES.find(
+      (a) => a.slug === 'convert-instagram-followers-to-website-buyers'
+    );
+    const orderedSource = pillarArticle
+      ? [pillarArticle, ...autoList, ...BLOG_ARTICLES]
+      : [...autoList, ...BLOG_ARTICLES];
     const seen = new Set<string>();
     const merged: BlogArticle[] = [];
-    for (const art of [...autoList, ...BLOG_ARTICLES]) {
+    for (const art of orderedSource) {
       if (!seen.has(art.slug)) {
         seen.add(art.slug);
         merged.push(art);
@@ -139,8 +145,22 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
     });
   }, [allArticles, articleCategory, articleSearch]);
 
+  const pillarHighlightArticle = allArticles.find(
+    (a) => a.slug === 'convert-instagram-followers-to-website-buyers'
+  );
+  const showPillarSpotlight =
+    Boolean(pillarHighlightArticle) &&
+    articleCategory === 'همه' &&
+    !articleSearch.trim();
+
+  const gridArticles = showPillarSpotlight
+    ? filteredArticles.filter(
+        (a) => a.slug !== 'convert-instagram-followers-to-website-buyers'
+      )
+    : filteredArticles;
+
   const visibleArticles =
-    mode === 'home-preview' ? filteredArticles.slice(0, 8) : filteredArticles;
+    mode === 'home-preview' ? gridArticles.slice(0, 8) : gridArticles;
 
   const filteredFaqs = useMemo(() => {
     return allFaqs.filter(
@@ -266,89 +286,11 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
   return (
     <div className="w-full">
       {/* ================================================================= */}
-      {/* 1. DID YOU KNOW? (آیا می‌دانید؟ — ۱۲ حقیقت کاربردی وب و فروش ایران) */}
-      {/* ================================================================= */}
-      <section
-        id="did-you-know"
-        className="w-full py-14 sm:py-18 bg-[#F8FAFC] border-b border-slate-200"
-      >
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 space-y-7">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="space-y-1.5 max-w-3xl">
-              <div className="text-xs font-bold text-amber-700 flex items-center gap-1.5">
-                <Lightbulb className="w-4 h-4" />
-                <span>آیا می‌دانید؟ و دانستنی‌های طلایی راه‌اندازی و رشد سایت ({allDykFacts.length.toLocaleString('fa-IR')} نکته)</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                {allDykFacts.length.toLocaleString('fa-IR')} حقیقت و دانستنی کلیدی برای راه‌اندازی، دیده‌شدن و رتبه‌گیری سایت
-              </h2>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setShowAllDyk((prev) => !prev)}
-              className="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-xs font-extrabold text-slate-800 cursor-pointer self-start shrink-0"
-            >
-              {showAllDyk
-                ? 'نمایش خلاصه (۶ مورد)'
-                : `مشاهده هر ${allDykFacts.length.toLocaleString('fa-IR')} مورد آیا می‌دانید`}
-            </button>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-1.5">
-            {dykCategories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setDykCategory(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors whitespace-nowrap ${
-                  dykCategory === cat
-                    ? 'bg-slate-900 text-white'
-                    : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {visibleDyk.map((fact) => (
-              <div
-                key={fact.id}
-                className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between gap-3.5"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-slate-500">
-                      {fact.category}
-                    </span>
-                    <span className="font-mono font-extrabold text-blue-700 tabular-nums">
-                      {fact.stat}
-                    </span>
-                  </div>
-                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
-                    {fact.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {fact.detail}
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-100 text-[11px] font-bold text-emerald-700">
-                  راهکار پاشالان: {fact.actionTip}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 2. PROFESSIONAL SEO ARTICLES (مقالات تخصصی با استاندارد E-E-A-T)     */}
+      {/* 1. PROFESSIONAL SEO ARTICLES FIRST (مقالات تخصصی با استاندارد E-E-A-T) */}
       {/* ================================================================= */}
       <section
         id="articles-hub"
-        className="w-full py-14 sm:py-18 bg-white border-b border-slate-200"
+        className="w-full py-12 sm:py-16 bg-white border-b border-slate-200"
       >
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 space-y-7">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
@@ -372,6 +314,50 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
               </button>
             )}
           </div>
+
+          {/* Featured Pillar Guide Spotlight Card (Shown once without duplicating in grid below) */}
+          {showPillarSpotlight && pillarHighlightArticle && (
+            <div
+              onClick={() => handleCardClick(pillarHighlightArticle)}
+              className="group rounded-3xl bg-gradient-to-l from-slate-950 via-blue-950 to-slate-900 text-white border border-blue-800/70 p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center cursor-pointer shadow-lg hover:border-emerald-400/70 transition-all"
+            >
+              <div className="lg:col-span-8 space-y-3">
+                <div className="flex flex-wrap items-center gap-2 text-[11px] font-extrabold">
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-400 text-slate-950">
+                    ★ مقاله ویژه جامع (+۴۰۰۰ کلمه)
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-white/10 text-emerald-300 border border-white/15">
+                    شامل ۲۰ نمونه زنده تبدیل پیج اینستاگرام به سایت
+                  </span>
+                  <span className="text-slate-300">{pillarHighlightArticle.readTime}</span>
+                </div>
+                <h3 className="text-lg sm:text-2xl font-extrabold leading-snug group-hover:text-emerald-300 transition-colors">
+                  {pillarHighlightArticle.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-2">
+                  {pillarHighlightArticle.excerpt}
+                </p>
+                <div className="pt-1 flex flex-wrap items-center gap-3">
+                  <span className="px-4 py-2.5 rounded-xl bg-emerald-400 group-hover:bg-emerald-300 text-slate-950 font-black text-xs inline-flex items-center gap-1.5 transition-colors">
+                    <span>مطالعه کامل مقاله + مشاهده ۲۰ نمونه تبدیل‌شده</span>
+                    <ArrowUpLeft className="w-4 h-4" />
+                  </span>
+                  <span className="text-[11px] text-slate-300 flex items-center gap-1">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <span>{pillarHighlightArticle.author} · تاییدشده با استاندارد Google E-E-A-T</span>
+                  </span>
+                </div>
+              </div>
+              <div className="lg:col-span-4 aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-slate-800">
+                <img
+                  src={pillarHighlightArticle.image}
+                  alt={pillarHighlightArticle.title}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          )}
 
           {/* Live Google Suggest Search Intent Bar (E-E-A-T Compliant) */}
           {liveFeed && liveFeed.activeTrendingQueries && liveFeed.activeTrendingQueries.length > 0 && (
@@ -400,7 +386,7 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                       if (matched) {
                         handleCardClick(matched);
                       } else {
-                        setArticleCategory('همه مقالات');
+                        setArticleCategory('همه');
                         setArticleSearch(q);
                       }
                     }}
@@ -508,6 +494,84 @@ export const KnowledgeFaqSection: React.FC<KnowledgeFaqSectionProps> = ({
                 </button>
               </div>
             )}
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 2. DID YOU KNOW? (آیا می‌دانید؟ و دانستنی‌های طلایی)               */}
+      {/* ================================================================= */}
+      <section
+        id="did-you-know"
+        className="w-full py-14 sm:py-18 bg-[#F8FAFC] border-b border-slate-200"
+      >
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 space-y-7">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-1.5 max-w-3xl">
+              <div className="text-xs font-bold text-amber-700 flex items-center gap-1.5">
+                <Lightbulb className="w-4 h-4" />
+                <span>آیا می‌دانید؟ و دانستنی‌های طلایی راه‌اندازی و رشد سایت ({allDykFacts.length.toLocaleString('fa-IR')} نکته)</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                {allDykFacts.length.toLocaleString('fa-IR')} حقیقت و دانستنی کلیدی برای راه‌اندازی، دیده‌شدن و رتبه‌گیری سایت
+              </h2>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowAllDyk((prev) => !prev)}
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-xs font-extrabold text-slate-800 cursor-pointer self-start shrink-0"
+            >
+              {showAllDyk
+                ? 'نمایش خلاصه (۶ مورد)'
+                : `مشاهده هر ${allDykFacts.length.toLocaleString('fa-IR')} مورد آیا می‌دانید`}
+            </button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1.5">
+            {dykCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setDykCategory(cat)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors whitespace-nowrap ${
+                  dykCategory === cat
+                    ? 'bg-slate-900 text-white'
+                    : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {visibleDyk.map((fact) => (
+              <div
+                key={fact.id}
+                className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between gap-3.5"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-500">
+                      {fact.category}
+                    </span>
+                    <span className="font-mono font-extrabold text-blue-700 tabular-nums">
+                      {fact.stat}
+                    </span>
+                  </div>
+                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
+                    {fact.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {fact.detail}
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-100 text-[11px] font-bold text-emerald-700">
+                  راهکار پاشالان: {fact.actionTip}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

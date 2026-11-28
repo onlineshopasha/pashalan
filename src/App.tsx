@@ -74,6 +74,7 @@ import { ToolsHubPage } from './components/ToolsHubPage';
 import { PluginDetailPage } from './components/PluginDetailPage';
 import { ContactPage } from './components/ContactPage';
 import { AdminPanelModal } from './components/AdminPanelModal';
+import { InstagramPillarArticleView } from './components/InstagramPillarArticleView';
 export type ActivePageView =
   | 'home'
   | 'templates'
@@ -817,8 +818,16 @@ export default function App() {
             ))}
           </nav>
 
-          {/* PWA Install, Auth & Live Shopping Cart Button */}
+          {/* PWA Install, Quick Call Icon, Auth & Live Shopping Cart Button */}
           <div className="flex items-center gap-2 shrink-0">
+            <a
+              href="tel:+989197254078"
+              aria-label="تماس مستقیم با مشاور پاشالان"
+              title="تماس مستقیم با مشاور"
+              className="w-9 h-9 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white border border-emerald-200 flex items-center justify-center transition-colors shrink-0"
+            >
+              <PhoneCall className="w-4 h-4" />
+            </a>
             <PWAInstallButton />
             <button
               type="button"
@@ -1901,9 +1910,38 @@ export default function App() {
         {activePage === 'blog' && (
           <div className="w-full">
             {selectedBlogArticle ? (
-              <section className="w-full py-10 sm:py-14 bg-[#F8FAFC]">
-                <div className="w-full max-w-4xl mx-auto px-4 sm:px-8">
-                  <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 space-y-6">
+              selectedBlogArticle.slug ===
+              'convert-instagram-followers-to-website-buyers' ? (
+                <InstagramPillarArticleView
+                  article={selectedBlogArticle}
+                  onBack={() => navigateToPage('blog')}
+                  onPreviewConvertedShop={({
+                    brandName,
+                    accentColor,
+                    category,
+                    templateIndex,
+                  }) => {
+                    const list = SHELF_TEMPLATES_BY_CATEGORY[category] || [];
+                    const kit =
+                      list[templateIndex % Math.max(1, list.length)] ||
+                      SHELF_TEMPLATES_BY_CATEGORY['ecommerce-shop'][0];
+                    if (kit) {
+                      setCustomBrandName(brandName);
+                      setCustomBrandColor(accentColor);
+                      setLivePreviewTab('live-site');
+                      setLivePreviewKit(kit);
+                    }
+                  }}
+                  onOrderComPackage={() => {
+                    toggleComPackageInCart();
+                    setCartOpen(true);
+                  }}
+                  onGoToTemplates={() => navigateToPage('templates')}
+                />
+              ) : (
+                <section className="w-full py-10 sm:py-14 bg-[#F8FAFC]">
+                  <div className="w-full max-w-4xl mx-auto px-4 sm:px-8">
+                    <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 space-y-6">
                     <button
                       type="button"
                       onClick={() => navigateToPage('blog')}
@@ -1982,9 +2020,10 @@ export default function App() {
                         </div>
                       ))}
                     </div>
+                    </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              )
             ) : (
               <Suspense
                 fallback={
@@ -2175,10 +2214,14 @@ export default function App() {
             <p className="text-slate-400 leading-relaxed">
               طراحی سایت اختصاصی و ۱۴۰ طرح زنده ایرانی با دامنه .com رایگان (پکیج ۲۰ میلیونی)، هاست ابری رایگان، ۱۴ افزونه رایگان تا VIP و پرداخت امن درگاه بله.
             </p>
-            <div className="flex items-center gap-2 text-emerald-400 font-mono font-bold">
-              <PhoneCall className="w-4 h-4" />
-              <a href="tel:09197254078" dir="ltr" className="hover:underline">
-                09197254078
+            <div className="pt-1">
+              <a
+                href="tel:+989197254078"
+                aria-label="تماس مستقیم با مشاور پاشالان"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-slate-950 border border-emerald-400/30 font-extrabold transition-colors"
+              >
+                <PhoneCall className="w-4 h-4 shrink-0" />
+                <span>تماس مستقیم با مشاور</span>
               </a>
             </div>
           </div>
@@ -2381,7 +2424,27 @@ export default function App() {
           />
         </Suspense>
       )}
-      {/* Site-Wide Floating Pashalan AI Assistant */}
+      {/* Site-Wide Floating Quick Call Button (Bottom-Right) */}
+      <a
+        href="tel:+989197254078"
+        aria-label="تماس فوری با مشاور پاشالان"
+        title="تماس فوری با مشاور پاشالان"
+        dir="rtl"
+        className="fixed bottom-16 sm:bottom-20 right-3 sm:right-6 z-40 group flex items-center gap-2 sm:gap-2.5 pl-3 sm:pl-4 pr-2.5 sm:pr-3 py-2 sm:py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-300/60 shadow-2xl transition-all"
+      >
+        <span className="relative w-9 h-9 rounded-xl bg-white/15 text-white flex items-center justify-center shrink-0">
+          <PhoneCall className="w-5 h-5" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-300 ring-2 ring-emerald-600 animate-pulse" />
+        </span>
+        <div className="text-right leading-tight">
+          <div className="text-xs font-black text-white">تماس فوری</div>
+          <div className="text-[10px] text-emerald-100 font-bold hidden sm:block">
+            مشاوره رایگان ۹ تا ۲۲
+          </div>
+        </div>
+      </a>
+
+      {/* Site-Wide Floating Pashalan AI Assistant (Bottom-Left) */}
       <PashalanAiFloatingWidget
         handlers={aiActionHandlers}
         externalOpenNonce={aiOpenNonce}

@@ -155,7 +155,7 @@ function resolveRecommendations(
           badge: 'خدمات سئو',
         },
         contact: {
-          title: 'تماس مستقیم و رزرو مشاوره (09197254078)',
+          title: 'تماس مستقیم و رزرو مشاوره آنلاین',
           subtitle: 'ارتباط فوری تلفنی، واتساپ یا ثبت زمان تماس دلخواه',
           badge: 'تماس مستقیم',
         },
@@ -430,7 +430,7 @@ export const PashalanAiFloatingWidget: React.FC<FloatingWidgetProps> = ({
         {
           id: `v-${Date.now()}`,
           role: 'model',
-          text: 'مرورگر فعلی شما از تایپ صوتی فارسی پشتیبانی نمی‌کند (در Chrome یا Edge فعال است). می‌توانید سوالتان را تایپ کنید یا با 09197254078 تماس بگیرید.',
+          text: 'مرورگر فعلی شما از تایپ صوتی فارسی پشتیبانی نمی‌کند (در Chrome یا Edge فعال است). می‌توانید سوالتان را تایپ کنید یا از آیکون تماس فوری استفاده نمایید.',
         },
       ]);
       return;
@@ -585,7 +585,8 @@ export const PashalanAiFloatingWidget: React.FC<FloatingWidgetProps> = ({
             <div className="flex items-center gap-1 shrink-0">
               <a
                 href="tel:+989197254078"
-                title="تماس مستقیم 09197254078"
+                title="تماس مستقیم با مشاور"
+                aria-label="تماس مستقیم با مشاور"
                 className="p-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300"
               >
                 <PhoneCall className="w-4 h-4" />
@@ -956,8 +957,8 @@ export const PashalanAiConsultantSection: React.FC<{
             <div className="text-[11px] text-slate-300">
               نیاز به مشاوره تلفنی دارید؟
             </div>
-            <div dir="ltr" className="text-sm font-mono font-black text-emerald-300">
-              0919 725 4078
+            <div className="text-xs font-black text-emerald-300">
+              برقراری تماس مستقیم
             </div>
           </div>
         </a>

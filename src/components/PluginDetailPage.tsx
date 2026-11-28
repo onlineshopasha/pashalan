@@ -1078,7 +1078,7 @@ export const PluginDetailPage: React.FC<PluginDetailPageProps> = ({
             و نسخه سازمانی VIP به مبلغ{' '}
             <strong>{plugin.vipPriceToman.toLocaleString('fa-IR')} تومان</strong>{' '}
             همراه با {plugin.warrantyLabel}، زمان تحویل {plugin.deliveryLabel} و سازگاری با{' '}
-            {plugin.compatibility} ارائه می‌شود. مشاوره مستقیم نصب و اتصال: 09197254078.
+            {plugin.compatibility} ارائه می‌شود. مشاوره مستقیم نصب و اتصال از طریق آیکون تماس فوری و واتساپ سایت در دسترس است.
           </p>
         </aside>
       </div>

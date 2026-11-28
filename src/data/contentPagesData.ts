@@ -1,3 +1,8 @@
+import {
+  INSTAGRAM_PILLAR_META,
+  INSTAGRAM_PILLAR_SECTIONS,
+} from './instagramToSitePillarData';
+
 export interface BlogArticle {
   id: string;
   slug: string;
@@ -948,31 +953,24 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     id: 'article-09-instagram-to-website',
-    slug: 'convert-instagram-followers-to-website-buyers',
-    title: 'چگونه فالوورهای اینستاگرام را به خریدار دائمی سایت تبدیل کنیم؟ (راهنمای عملی فروشگاه‌ها)',
+    slug: INSTAGRAM_PILLAR_META.slug,
+    title: INSTAGRAM_PILLAR_META.title,
     category: 'فروشگاه اینترنتی',
-    readTime: '۶ دقیقه مطالعه',
-    publishDate: '۱۴۰۵/۰۸/۰۲',
-    author: 'امیرمحمد کاظمی',
-    authorRole: 'مشاور رشد فروشگاه‌های آنلاین',
+    readTime: INSTAGRAM_PILLAR_META.readTime,
+    publishDate: INSTAGRAM_PILLAR_META.publishDate,
+    isoDate: INSTAGRAM_PILLAR_META.isoDate,
+    author: INSTAGRAM_PILLAR_META.author,
+    authorRole: INSTAGRAM_PILLAR_META.authorRole,
+    reviewedBy: INSTAGRAM_PILLAR_META.reviewedBy,
+    searchIntentQuery: INSTAGRAM_PILLAR_META.searchIntentQuery,
+    humanExperienceNote: INSTAGRAM_PILLAR_META.humanExperienceNote,
     image: ARTICLE_IMAGES[8],
-    excerpt:
-      'پاسخ دادن به صدها دایرکت «قیمت لطفاً» وقت و فروش شما را هدر می‌دهد؛ با ۵ تکنیک ساده خریداران اینستاگرام را به سایت هدایت کنید.',
-    keyTakeaways: [
-      'ارائه کد تخفیف ۵٪ یا ارسال رایگان اختصاصی برای سفارش از طریق سایت، فالوورها را به خرید آنلاین عادت می‌دهد.',
-      'ورود سریع با شماره موبایل (OTP) باعث می‌شود خرید در موبایل زیر ۴۵ ثانیه تمام شود.',
-      'باشگاه مشتریان و امتیاز خرید بعدی، مشتری اینستاگرامی را به خریدار وفادار سایت تبدیل می‌کند.',
-    ],
-    sections: [
-      {
-        heading: '۱. چرا فروش در دایرکت سقف رشد دارد؟',
-        body: 'در دایرکت نمی‌توانید همزمان به ۵۰ مشتری پاسخ دهید، موجودی سایزها را لحظه‌ای کم کنید یا خرید اقساطی اسنپ‌پی بدهید. سایت ۲۴ ساعته بدون خستگی و بدون خطای انسانی سفارش می‌گیرد.',
-      },
-      {
-        heading: '۲. لینک هوشمند استوری مستقیم به صفحه محصول',
-        body: 'به‌جای لینک صفحه اصلی، لینک مستقیم هر محصول را در استوری بگذارید و گزینه پرداخت ۴ قسطه را یادآوری کنید تا نرخ تبدیل شما تا ۳ برابر شود.',
-      },
-    ],
+    excerpt: INSTAGRAM_PILLAR_META.excerpt,
+    keyTakeaways: INSTAGRAM_PILLAR_META.keyTakeaways,
+    sections: INSTAGRAM_PILLAR_SECTIONS.map((s) => ({
+      heading: s.heading,
+      body: s.body,
+    })),
   },
   {
     id: 'article-10-clinic-booking',

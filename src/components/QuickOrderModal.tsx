@@ -159,10 +159,10 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 ارسال در تلگرام
               </a>
               <a
-                href="tel:09197254078"
+                href="tel:+989197254078"
                 className="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs text-center transition-colors"
               >
-                تماس 09197254078
+                تماس مستقیم تلفنی
               </a>
             </div>
             <button

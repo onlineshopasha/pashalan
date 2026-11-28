@@ -811,11 +811,11 @@ export const HostingDomainsPage: React.FC<HostingDomainsPageProps> = ({
                   <ArrowUpLeft className="w-4 h-4 shrink-0" />
                 </button>
                 <a
-                  href="tel:09197254078"
+                  href="tel:+989197254078"
                   className="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs font-bold transition-colors flex items-center justify-center gap-2"
                 >
                   <Headphones className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>تماس مستقیم فنی: 09197254078</span>
+                  <span>تماس مستقیم با واحد فنی</span>
                 </a>
               </div>
             </div>
